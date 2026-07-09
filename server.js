@@ -8,7 +8,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(__dirname));
 
 const QUESTION_BANK = [
   {
@@ -332,7 +332,9 @@ function applyEffect(room, fromId, effect, targetId){
     nextQuestion(room);
   }, 7000);
 }
-
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
 io.on("connection", (socket)=>{
   socket.on("joinRoom", ({roomCode, name}, cb)=>{
     const code = (roomCode || "CLASE").trim().toUpperCase();
