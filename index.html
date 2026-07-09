@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,140 +6,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Misión Pitágoras Arena</title>
 <style>
-:root{
-  --navy:#061A40; --blue:#155EEF; --cyan:#06B6D4; --green:#12B76A;
-  --red:#F04438; --yellow:#FEC84B; --orange:#FB6514; --purple:#7A5AF8;
-  --ink:#101828; --muted:#667085; --line:#D0D5DD; --soft:#F2F4F7;
-}
+:root{--navy:#061A40;--blue:#155EEF;--cyan:#06B6D4;--green:#12B76A;--red:#F04438;--yellow:#FEC84B;--orange:#FB6514;--purple:#7A5AF8;--ink:#101828;--muted:#667085;--line:#D0D5DD;--soft:#F2F4F7}
 *{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  color:var(--ink);
-  min-height:100vh;
-  background:
-    radial-gradient(circle at 12% 10%,rgba(254,200,75,.30),transparent 26%),
-    radial-gradient(circle at 85% 12%,rgba(122,90,248,.25),transparent 28%),
-    linear-gradient(135deg,#071952,#0B666A 60%,#35A29F);
-}
-body:before{
-  content:"";
-  position:fixed;inset:0;pointer-events:none;opacity:.16;
-  background-image:linear-gradient(rgba(255,255,255,.25) 1px, transparent 1px),
-                   linear-gradient(90deg,rgba(255,255,255,.25) 1px, transparent 1px);
-  background-size:42px 42px;
-}
-header{
-  color:white;text-align:center;padding:20px 15px 16px;
-}
-header h1{margin:0;font-size:clamp(1.7rem,4vw,3rem);text-shadow:0 6px 18px #0006}
-header p{margin:7px 0 0;font-weight:800;color:#EAF4FF}
-.container{position:relative;max-width:1240px;margin:0 auto;padding:0 14px 42px}
-.card{
-  background:rgba(255,255,255,.95);
-  border:1px solid rgba(255,255,255,.55);
-  box-shadow:0 22px 60px #0004;
-  border-radius:26px;
-  padding:22px;
-  margin-bottom:18px;
-  backdrop-filter:blur(8px);
-}
-.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:center}
-.badge,.pill{
-  display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:8px 12px;
-  font-weight:900;margin:4px;background:#EAF4FF;color:#084C61;border:1px solid #B9E6FE
-}
-.badge.hot{background:#FFF3D6;color:#7A2E0E;border-color:#FEDF89}
-input{
-  width:100%;padding:13px 14px;border:2px solid #B9E6FE;border-radius:15px;font-size:1rem;
-  margin:8px 0 12px;outline:none;transition:.2s
-}
-input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(21,94,239,.12)}
-button{
-  border:none;border-radius:15px;padding:12px 16px;font-size:1rem;font-weight:900;cursor:pointer;
-  transition:.18s
-}
-button:hover{transform:translateY(-2px);filter:brightness(1.03)}
-button:disabled{opacity:.48;cursor:not-allowed;transform:none}
-.primary{background:linear-gradient(135deg,var(--blue),var(--purple));color:white}
-.secondary{background:#EAF4FF;color:#084C61}
-.danger{background:linear-gradient(135deg,#F04438,#FB6514);color:white}
-.success{background:linear-gradient(135deg,#12B76A,#06B6D4);color:white}
-.yellow{background:linear-gradient(135deg,#FEC84B,#FDB022);color:#1D2939}
-.hidden{display:none!important}
-.grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(330px,.85fr);gap:18px}
-.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
-.timer{
-  font-size:1.25rem;font-weight:1000;color:#B42318;background:#FEF3F2;border:1px solid #FECDCA;
-  padding:9px 13px;border-radius:999px;min-width:88px;text-align:center
-}
-.timer.low{animation:pulse .7s infinite;background:#F04438;color:white}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
-.progressOuter{height:16px;background:#EAECF0;border-radius:999px;overflow:hidden;margin:14px 0}
-.progressBar{height:100%;width:0%;background:linear-gradient(90deg,#12B76A,#FEC84B,#F04438);transition:.35s}
-.questionTitle{color:#083344;margin:8px 0;font-size:clamp(1.35rem,2.4vw,2rem)}
-.scenario{
-  background:linear-gradient(135deg,#F8FBFF,#EAFCFF);
-  border-left:8px solid var(--cyan);border-radius:18px;padding:15px;line-height:1.55;font-size:1.08rem;
-  box-shadow:inset 0 0 0 1px #D1FADF
-}
-.interactivePanel{
-  display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0
-}
-.miniTask{
-  background:#F8FBFF;border:1px solid #D0D5DD;border-radius:18px;padding:12px
-}
-.miniTask h4{margin:0 0 8px;color:#084C61}
-.sideBtns{display:flex;gap:8px;flex-wrap:wrap}
-.sideBtn{padding:9px 11px;background:white;border:2px solid #D0D5DD;color:#1D2939}
-.sideBtn.active{border-color:#155EEF;background:#EAF4FF}
-.sideBtn.good{border-color:#12B76A;background:#ECFDF3}
-.sideBtn.bad{border-color:#F04438;background:#FEF3F2}
-.visualWrap{
-  position:relative;overflow:hidden;border-radius:24px;margin:14px 0;
-  background:linear-gradient(135deg,#EAF4FF,#FFFFFF);border:1px solid #D0D5DD
-}
-.visual{display:flex;justify-content:center;padding:8px}
-svg{max-width:650px;width:100%}
-.question{font-size:1.12rem;font-weight:1000;color:#1D2939;margin:14px 0}
-.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.option{
-  background:white;color:#1D2939;border:2px solid #D0D5DD;text-align:left;min-height:64px;
-  box-shadow:0 10px 20px rgba(16,24,40,.08)
-}
-.option:hover{border-color:#155EEF;box-shadow:0 12px 28px rgba(21,94,239,.16)}
-.option.correct{background:#ECFDF3;border-color:#12B76A}
-.option.wrong{background:#FEF3F2;border-color:#F04438}
-.feedback{margin-top:14px;border-radius:18px;padding:14px;font-weight:900;line-height:1.45}
-.ok{background:#ECFDF3;color:#05603A;border:1px solid #ABEFC6}
-.no{background:#FEF3F2;color:#B42318;border:1px solid #FECDCA}
-.info{background:#FFFAEB;color:#93370D;border:1px solid #FEDF89}
-.explanation{margin-top:9px;font-weight:600;background:white;border-radius:13px;padding:11px;color:#1D2939}
-.leader{
-  display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid #EAECF0;
-  border-radius:18px;padding:11px;margin:9px 0;background:linear-gradient(135deg,#FFFFFF,#F8FBFF)
-}
-.leader.first{border-color:#FEC84B;background:linear-gradient(135deg,#FFFAEB,#FFFFFF)}
-.avatar{width:38px;height:38px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,#155EEF,#7A5AF8);color:white;font-weight:1000;margin-right:8px}
-.name{font-weight:1000}.dead{opacity:.5;text-decoration:line-through}.lives{color:#B42318;font-weight:1000}.score{color:#155EEF;font-weight:1000}
-.effectPanel{border:2px dashed #F79009;background:#FFFAEB;border-radius:22px;padding:14px;margin-top:14px}
-.teacherBox{background:#FFFAEB;border:1px solid #FEDF89;border-radius:18px;padding:14px;line-height:1.5}
-.floatingIcons{font-size:3rem;text-align:center;line-height:1.7}.floatIcon{display:inline-block;margin:6px;animation:floaty 2.5s infinite ease-in-out}
-.floatIcon:nth-child(2){animation-delay:.3s}.floatIcon:nth-child(3){animation-delay:.6s}.floatIcon:nth-child(4){animation-delay:.9s}
-@keyframes floaty{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-10px) rotate(3deg)}}
-.confetti{position:fixed;top:-10px;width:10px;height:16px;z-index:9999;animation:fall 1.2s linear forwards}
-@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:.2}}
-.small{font-size:.92rem;color:#667085}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);min-height:100vh;background:radial-gradient(circle at 12% 10%,rgba(254,200,75,.30),transparent 26%),radial-gradient(circle at 85% 12%,rgba(122,90,248,.25),transparent 28%),linear-gradient(135deg,#071952,#0B666A 60%,#35A29F)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background-image:linear-gradient(rgba(255,255,255,.25) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.25) 1px,transparent 1px);background-size:42px 42px}
+header{color:white;text-align:center;padding:20px 15px 16px}header h1{margin:0;font-size:clamp(1.7rem,4vw,3rem);text-shadow:0 6px 18px #0006}header p{margin:7px 0 0;font-weight:800;color:#EAF4FF}
+.container{position:relative;max-width:1240px;margin:0 auto;padding:0 14px 42px}.card{background:rgba(255,255,255,.95);border:1px solid rgba(255,255,255,.55);box-shadow:0 22px 60px #0004;border-radius:26px;padding:22px;margin-bottom:18px;backdrop-filter:blur(8px)}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:center}.badge,.pill{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:8px 12px;font-weight:900;margin:4px;background:#EAF4FF;color:#084C61;border:1px solid #B9E6FE}.badge.hot{background:#FFF3D6;color:#7A2E0E;border-color:#FEDF89}
+input{width:100%;padding:13px 14px;border:2px solid #B9E6FE;border-radius:15px;font-size:1rem;margin:8px 0 12px;outline:none;transition:.2s}input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(21,94,239,.12)}
+button{border:none;border-radius:15px;padding:12px 16px;font-size:1rem;font-weight:900;cursor:pointer;transition:.18s}button:hover{transform:translateY(-2px);filter:brightness(1.03)}button:disabled{opacity:.48;cursor:not-allowed;transform:none}
+.primary{background:linear-gradient(135deg,var(--blue),var(--purple));color:white}.secondary{background:#EAF4FF;color:#084C61}.danger{background:linear-gradient(135deg,#F04438,#FB6514);color:white}.success{background:linear-gradient(135deg,#12B76A,#06B6D4);color:white}.yellow{background:linear-gradient(135deg,#FEC84B,#FDB022);color:#1D2939}.hidden{display:none!important}
+.grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(330px,.85fr);gap:18px}.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.timer{font-size:1.25rem;font-weight:1000;color:#B42318;background:#FEF3F2;border:1px solid #FECDCA;padding:9px 13px;border-radius:999px;min-width:88px;text-align:center}.timer.low{animation:pulse .7s infinite;background:#F04438;color:white}@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.progressOuter{height:16px;background:#EAECF0;border-radius:999px;overflow:hidden;margin:14px 0}.progressBar{height:100%;width:0%;background:linear-gradient(90deg,#12B76A,#FEC84B,#F04438);transition:.35s}.questionTitle{color:#083344;margin:8px 0;font-size:clamp(1.35rem,2.4vw,2rem)}
+.scenario{background:linear-gradient(135deg,#F8FBFF,#EAFCFF);border-left:8px solid var(--cyan);border-radius:18px;padding:15px;line-height:1.55;font-size:1.08rem;box-shadow:inset 0 0 0 1px #D1FADF}
+.interactivePanel{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}.miniTask{background:#F8FBFF;border:1px solid #D0D5DD;border-radius:18px;padding:12px}.miniTask h4{margin:0 0 8px;color:#084C61}.sideBtns{display:flex;gap:8px;flex-wrap:wrap}.sideBtn{padding:9px 11px;background:white;border:2px solid #D0D5DD;color:#1D2939}.sideBtn.good{border-color:#12B76A;background:#ECFDF3}.sideBtn.bad{border-color:#F04438;background:#FEF3F2}
+.visualWrap{position:relative;overflow:hidden;border-radius:24px;margin:14px 0;background:linear-gradient(135deg,#EAF4FF,#FFFFFF);border:1px solid #D0D5DD}.visual{display:flex;justify-content:center;padding:8px}svg{max-width:650px;width:100%}.question{font-size:1.12rem;font-weight:1000;color:#1D2939;margin:14px 0}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}.option{background:white;color:#1D2939;border:2px solid #D0D5DD;text-align:left;min-height:64px;box-shadow:0 10px 20px rgba(16,24,40,.08)}.option:hover{border-color:#155EEF;box-shadow:0 12px 28px rgba(21,94,239,.16)}.option.correct{background:#ECFDF3;border-color:#12B76A}.option.wrong{background:#FEF3F2;border-color:#F04438}
+.feedback{margin-top:14px;border-radius:18px;padding:14px;font-weight:900;line-height:1.45}.ok{background:#ECFDF3;color:#05603A;border:1px solid #ABEFC6}.no{background:#FEF3F2;color:#B42318;border:1px solid #FECDCA}.info{background:#FFFAEB;color:#93370D;border:1px solid #FEDF89}.explanation{margin-top:9px;font-weight:600;background:white;border-radius:13px;padding:11px;color:#1D2939}
+.leader{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid #EAECF0;border-radius:18px;padding:11px;margin:9px 0;background:linear-gradient(135deg,#FFFFFF,#F8FBFF)}.leader.first{border-color:#FEC84B;background:linear-gradient(135deg,#FFFAEB,#FFFFFF)}.avatar{width:38px;height:38px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#155EEF,#7A5AF8);color:white;font-weight:1000;margin-right:8px}.name{font-weight:1000}.dead{opacity:.5;text-decoration:line-through}.lives{color:#B42318;font-weight:1000}.score{color:#155EEF;font-weight:1000}
+.effectPanel{border:2px dashed #F79009;background:#FFFAEB;border-radius:22px;padding:14px;margin-top:14px}.teacherBox{background:#FFFAEB;border:1px solid #FEDF89;border-radius:18px;padding:14px;line-height:1.5}.floatingIcons{font-size:3rem;text-align:center;line-height:1.7}.floatIcon{display:inline-block;margin:6px;animation:floaty 2.5s infinite ease-in-out}.floatIcon:nth-child(2){animation-delay:.3s}.floatIcon:nth-child(3){animation-delay:.6s}.floatIcon:nth-child(4){animation-delay:.9s}@keyframes floaty{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-10px) rotate(3deg)}}
+.confetti{position:fixed;top:-10px;width:10px;height:16px;z-index:9999;animation:fall 1.2s linear forwards}@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:.2}}.small{font-size:.92rem;color:#667085}
 @media(max-width:900px){.grid,.hero,.interactivePanel{grid-template-columns:1fr}.options{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<header>
-  <h1>⚡ Misión Pitágoras Arena 🎮</h1>
-  <p>Ahora cada reto cambia de escena y no siempre se busca la hipotenusa</p>
-</header>
-
+<header><h1>⚡ Misión Pitágoras Arena 🎮</h1><p>Escenas contextualizadas, catetos e hipotenusa según cada pregunta</p></header>
 <div class="container">
 <section id="join" class="card">
   <div class="hero">
@@ -146,412 +38,67 @@ svg{max-width:650px;width:100%}
       <span class="badge hot">9° año · Geometría · Teorema de Pitágoras</span>
       <h2>Entrar a la competencia</h2>
       <p>Escribe tu nombre y el código de sala. Todos deben usar el mismo código para competir juntos.</p>
-      <label><strong>Nombre de usuario</strong></label>
-      <input id="name" placeholder="Ejemplo: Jeison"/>
-      <label><strong>Código de sala</strong></label>
-      <input id="room" value="CLASE"/>
+      <label><strong>Nombre de usuario</strong></label><input id="name" placeholder="Ejemplo: Jeison"/>
+      <label><strong>Código de sala</strong></label><input id="room" value="CLASE"/>
       <button class="primary" onclick="joinRoom()">🚀 Entrar al juego</button>
     </div>
     <div>
-      <div class="floatingIcons">
-        <span class="floatIcon">🚁</span><span class="floatIcon">🧳</span><span class="floatIcon">🪜</span>
-        <span class="floatIcon">🏟️</span><span class="floatIcon">📐</span><span class="floatIcon">🏆</span>
-      </div>
+      <div class="floatingIcons"><span class="floatIcon">🚁</span><span class="floatIcon">🧳</span><span class="floatIcon">🪜</span><span class="floatIcon">🏟️</span><span class="floatIcon">📐</span><span class="floatIcon">🏆</span></div>
       <div class="teacherBox"><strong>Dinámica:</strong> 3 vidas, 15 preguntas y poderes especiales en bonus.</div>
     </div>
   </div>
 </section>
-
 <section id="main" class="hidden">
   <div class="grid">
     <div class="card">
-      <div class="top">
-        <div>
-          <span class="pill" id="roomLabel"></span>
-          <span class="pill" id="phaseLabel"></span>
-          <span class="pill" id="roundLabel"></span>
-        </div>
-        <div class="timer" id="timer"></div>
-      </div>
+      <div class="top"><div><span class="pill" id="roomLabel"></span><span class="pill" id="phaseLabel"></span><span class="pill" id="roundLabel"></span></div><div class="timer" id="timer"></div></div>
       <div class="progressOuter"><div class="progressBar" id="progressBar"></div></div>
-
-      <div id="lobby">
-        <h2>🕹️ Sala de espera</h2>
-        <p>Cuando todos estén conectados, el anfitrión inicia la partida.</p>
-        <button id="startBtn" class="success hidden" onclick="startGame()">Iniciar partida</button>
-      </div>
-
+      <div id="lobby"><h2>🕹️ Sala de espera</h2><p>Cuando todos estén conectados, el anfitrión inicia la partida.</p><button id="startBtn" class="success hidden" onclick="startGame()">Iniciar partida</button></div>
       <div id="questionBox" class="hidden">
-        <span class="badge" id="qType"></span>
-        <h2 class="questionTitle" id="qTitle"></h2>
-        <div class="scenario" id="scenario"></div>
-
+        <span class="badge" id="qType"></span><h2 class="questionTitle" id="qTitle"></h2><div class="scenario" id="scenario"></div>
         <div class="interactivePanel">
-          <div class="miniTask">
-            <h4>1. ¿Qué medida se busca?</h4>
-            <div class="sideBtns">
-              <button class="sideBtn" onclick="checkSide('hipotenusa')">Hipotenusa</button>
-              <button class="sideBtn" onclick="checkSide('cateto')">Cateto</button>
-            </div>
-            <p class="small" id="sideMsg">Elige antes de responder para analizar mejor el problema.</p>
-          </div>
-          <div class="miniTask">
-            <h4>2. Apoyo visual</h4>
-            <button class="secondary" onclick="toggleHint()">👁️ Mostrar/ocultar pista</button>
-            <p class="small" id="visualHint"></p>
-          </div>
+          <div class="miniTask"><h4>1. ¿Qué medida se busca?</h4><div class="sideBtns"><button class="sideBtn" onclick="checkSide('hypotenuse', this)">Hipotenusa</button><button class="sideBtn" onclick="checkSide('cathetus', this)">Cateto</button></div><p class="small" id="sideMsg">Elige antes de responder para analizar mejor el problema.</p></div>
+          <div class="miniTask"><h4>2. Apoyo visual</h4><button class="secondary" onclick="toggleHint()">👁️ Mostrar/ocultar pista</button><p class="small" id="visualHint"></p></div>
         </div>
-
         <div class="visualWrap"><div class="visual" id="visual"></div></div>
-        <div class="question" id="question"></div>
-        <div class="options" id="options"></div>
-        <div id="feedback"></div>
-
-        <div id="effectPanel" class="effectPanel hidden">
-          <h3>🔥 ¡Pregunta bonus correcta!</h3>
-          <p>Elige un efecto negativo para aplicar a un oponente:</p>
-          <div id="effectTargets"></div>
-        </div>
+        <div class="question" id="question"></div><div class="options" id="options"></div><div id="feedback"></div>
+        <div id="effectPanel" class="effectPanel hidden"><h3>🔥 ¡Pregunta bonus correcta!</h3><p>Elige un efecto negativo para aplicar a un oponente:</p><div id="effectTargets"></div></div>
       </div>
-
-      <div id="ended" class="hidden">
-        <h2>🏁 Partida finalizada</h2>
-        <p>Revisa la tabla de posiciones. El anfitrión puede iniciar una nueva ronda.</p>
-        <button id="restartBtn" class="primary hidden" onclick="startGame()">Nueva ronda</button>
-      </div>
+      <div id="ended" class="hidden"><h2>🏁 Partida finalizada</h2><p>Revisa la tabla de posiciones. El anfitrión puede iniciar una nueva ronda.</p><button id="restartBtn" class="primary hidden" onclick="startGame()">Nueva ronda</button></div>
     </div>
-
     <div class="card">
-      <h2>🏆 Tabla de jugadores</h2>
-      <div id="players"></div>
-      <div class="feedback info">
-        <strong>Reglas rápidas</strong>
-        <div class="explanation">
-          ✅ Normal correcta: 100 pts.<br>
-          🔥 Bonus correcta: 300 pts + poder especial.<br>
-          ❤️ Cada jugador tiene 3 vidas.<br>
-          ❌ Al perder 3 vidas queda eliminado.
-        </div>
-      </div>
+      <h2>🏆 Tabla de jugadores</h2><div id="players"></div>
+      <div class="feedback info"><strong>Reglas rápidas</strong><div class="explanation">✅ Normal correcta: 100 pts.<br>🔥 Bonus correcta: 300 pts + poder especial.<br>❤️ Cada jugador tiene 3 vidas.<br>❌ Al perder 3 vidas queda eliminado.</div></div>
     </div>
   </div>
 </section>
 </div>
-
 <script src="/socket.io/socket.io.js"></script>
 <script>
-const socket = io();
-let myId=null, state=null, answerRevealed=null, countdown=null, lastQuestionId=null, hintVisible=false;
-
-function joinRoom(){
-  const name=document.getElementById("name").value.trim() || "Jugador";
-  const roomCode=document.getElementById("room").value.trim() || "CLASE";
-  socket.emit("joinRoom",{name,roomCode},(res)=>{
-    if(res.ok){myId=res.id;document.getElementById("join").classList.add("hidden");document.getElementById("main").classList.remove("hidden");}
-  });
-}
-function startGame(){ socket.emit("startGame"); }
-
-socket.on("roomState",(s)=>{ state=s; render(); });
-socket.on("answerReveal",(data)=>{ answerRevealed=data; renderReveal(); popConfetti(); });
-socket.on("effectNotice",(msg)=>{ showFeedback(`<div class="feedback no">⚠️ ${msg}</div>`); });
-socket.on("chooseEffect",()=>{ renderEffectPanel(); });
-
-function render(){
-  if(!state)return;
-  document.getElementById("roomLabel").innerText="Sala: "+state.code;
-  document.getElementById("phaseLabel").innerText=phaseName(state.phase);
-  document.getElementById("roundLabel").innerText=state.total?`${Math.min(state.questionIndex+1,state.total)}/${state.total}`:"Esperando";
-  document.getElementById("progressBar").style.width=state.total?`${(state.questionIndex/state.total)*100}%`:"0%";
-  renderPlayers();
-  const me=state.players.find(p=>p.id===myId);
-  const isHost=me && me.isHost;
-  document.getElementById("startBtn").classList.toggle("hidden",!(state.phase==="lobby" && isHost));
-  document.getElementById("restartBtn").classList.toggle("hidden",!(state.phase==="ended" && isHost));
-  document.getElementById("lobby").classList.toggle("hidden",state.phase!=="lobby");
-  document.getElementById("ended").classList.toggle("hidden",state.phase!=="ended");
-  document.getElementById("questionBox").classList.toggle("hidden",!(state.phase==="question"||state.phase==="effect"||state.phase==="answer"));
-  if(state.currentQuestion) renderQuestion();
-  startCountdown();
-}
-function phaseName(p){
-  return p==="lobby"?"Sala de espera":p==="question"?"Pregunta activa":p==="effect"?"Bonus: elegir poder":p==="answer"?"Revisión":"Finalizado";
-}
-function renderPlayers(){
-  const div=document.getElementById("players"); div.innerHTML="";
-  state.players.forEach((p,i)=>{
-    const initials=(p.name||"?").substring(0,1).toUpperCase();
-    const row=document.createElement("div");
-    row.className="leader "+(i===0?"first":"");
-    row.innerHTML=`<div><span class="avatar">${i===0?"👑":initials}</span><span class="name ${p.alive?'':'dead'}">${p.name}${p.isHost?' · anfitrión':''}</span><br><span class="lives">❤ ${p.lives}</span></div><div class="score">${p.score} pts</div>`;
-    div.appendChild(row);
-  });
-}
-function renderQuestion(){
-  const q=state.currentQuestion;
-  if(lastQuestionId !== q.id || state.phase==="question"){
-    answerRevealed=null; lastQuestionId=q.id; hintVisible=false;
-    document.getElementById("feedback").innerHTML="";
-    document.getElementById("effectPanel").classList.add("hidden");
-    document.getElementById("sideMsg").innerText="Elige antes de responder para analizar mejor el problema.";
-    document.querySelectorAll(".sideBtn").forEach(b=>{b.className="sideBtn";});
-    document.getElementById("visualHint").innerText="";
-  }
-  document.getElementById("qType").innerText=q.type==="bonus"?"🔥 PREGUNTA BONUS":"⭐ PREGUNTA NORMAL";
-  document.getElementById("qTitle").innerText=q.title;
-  document.getElementById("scenario").innerText=q.scenario;
-  document.getElementById("question").innerText=q.question;
-  document.getElementById("visual").innerHTML=sceneSVG(q);
-  const opts=document.getElementById("options"); opts.innerHTML="";
-  q.options.forEach((opt,idx)=>{
-    const btn=document.createElement("button");
-    btn.className="option";
-    btn.innerHTML=`<strong>${String.fromCharCode(65+idx)}.</strong> ${opt}`;
-    btn.dataset.value=opt;
-    btn.onclick=()=>submitAnswer(btn,opt);
-    opts.appendChild(btn);
-  });
-}
-function submitAnswer(btn,opt){
-  socket.emit("submitAnswer",{answer:opt});
-  document.querySelectorAll(".option").forEach(b=>b.disabled=true);
-  btn.style.outline="4px solid #FEC84B";
-}
-function renderReveal(){
-  if(!answerRevealed)return;
-  document.querySelectorAll(".option").forEach(b=>{
-    b.disabled=true;
-    if(b.dataset.value===answerRevealed.answer)b.classList.add("correct");
-  });
-  showFeedback(`<div class="feedback ok">✅ Respuesta correcta: ${answerRevealed.answer}<div class="explanation">${answerRevealed.explanation}</div></div>`);
-}
-function showFeedback(html){ document.getElementById("feedback").innerHTML=html; }
-
-function expectedSide(q){
-  const text=(q.title+" "+q.scenario+" "+q.question).toLowerCase();
-  if(text.includes("altura") || text.includes("distancia horizontal") || text.includes("otro cateto") || text.includes("hacia el norte faltan") || text.includes("base horizontal") || text.includes("alto") && text.includes("diagonal")) return "cateto";
-  if(text.includes("cuánto mide la altura") || text.includes("qué altura")) return "cateto";
-  if(text.includes("diagonal") || text.includes("cable") || text.includes("escalera") || text.includes("cuerda") || text.includes("distancia directa") || text.includes("línea recta") || text.includes("tirolesa")) return "hipotenusa";
-  return "hipotenusa";
-}
-function checkSide(side){
-  const q=state.currentQuestion;
-  const exp=expectedSide(q);
-  document.querySelectorAll(".sideBtn").forEach(b=>b.className="sideBtn");
-  event.target.classList.add(side===exp?"good":"bad");
-  document.getElementById("sideMsg").innerText=side===exp
-    ? "¡Correcto! Primero identificaste qué lado se busca."
-    : "Revisa el contexto: no siempre se busca el lado inclinado.";
-}
-function toggleHint(){
-  hintVisible=!hintVisible;
-  const q=state.currentQuestion;
-  const exp=expectedSide(q);
-  document.getElementById("visualHint").innerText=hintVisible
-    ? (exp==="hipotenusa" ? "Pista: se conocen los dos catetos y se busca el lado inclinado." : "Pista: se conoce la hipotenusa y un cateto; debes encontrar el otro cateto restando cuadrados.")
-    : "";
-}
-function renderEffectPanel(){
-  const panel=document.getElementById("effectPanel");
-  const targets=document.getElementById("effectTargets");
-  targets.innerHTML="";
-  const opponents=state.players.filter(p=>p.id!==myId && p.alive);
-  if(!opponents.length){targets.innerHTML="<p>No hay oponentes vivos para aplicar efecto.</p>";return;}
-  opponents.forEach(p=>{
-    const box=document.createElement("div");
-    box.className="leader";
-    box.innerHTML=`<strong>${p.name}</strong><div><button class="danger" onclick="applyEffect('life','${p.id}')">💔 Quitar vida</button> <button class="yellow" onclick="applyEffect('freeze','${p.id}')">🧊 Congelar</button> <button class="secondary" onclick="applyEffect('steal','${p.id}')">💰 Robar pts</button></div>`;
-    targets.appendChild(box);
-  });
-  panel.classList.remove("hidden");
-}
+const socket=io();let myId=null,state=null,answerRevealed=null,countdown=null,lastQuestionId=null,hintVisible=false;
+function joinRoom(){const name=document.getElementById("name").value.trim()||"Jugador";const roomCode=document.getElementById("room").value.trim()||"CLASE";socket.emit("joinRoom",{name,roomCode},(res)=>{if(res.ok){myId=res.id;document.getElementById("join").classList.add("hidden");document.getElementById("main").classList.remove("hidden");}});}
+function startGame(){socket.emit("startGame");}
+socket.on("roomState",(s)=>{state=s;render();});socket.on("answerReveal",(data)=>{answerRevealed=data;renderReveal();popConfetti();});socket.on("effectNotice",(msg)=>{showFeedback(`<div class="feedback no">⚠️ ${msg}</div>`);});socket.on("chooseEffect",()=>{renderEffectPanel();});
+function render(){if(!state)return;document.getElementById("roomLabel").innerText="Sala: "+state.code;document.getElementById("phaseLabel").innerText=phaseName(state.phase);document.getElementById("roundLabel").innerText=state.total?`${Math.min(state.questionIndex+1,state.total)}/${state.total}`:"Esperando";document.getElementById("progressBar").style.width=state.total?`${(state.questionIndex/state.total)*100}%`:"0%";renderPlayers();const me=state.players.find(p=>p.id===myId);const isHost=me&&me.isHost;document.getElementById("startBtn").classList.toggle("hidden",!(state.phase==="lobby"&&isHost));document.getElementById("restartBtn").classList.toggle("hidden",!(state.phase==="ended"&&isHost));document.getElementById("lobby").classList.toggle("hidden",state.phase!=="lobby");document.getElementById("ended").classList.toggle("hidden",state.phase!=="ended");document.getElementById("questionBox").classList.toggle("hidden",!(state.phase==="question"||state.phase==="effect"||state.phase==="answer"));if(state.currentQuestion)renderQuestion();startCountdown();}
+function phaseName(p){return p==="lobby"?"Sala de espera":p==="question"?"Pregunta activa":p==="effect"?"Bonus: elegir poder":p==="answer"?"Revisión":"Finalizado";}
+function renderPlayers(){const div=document.getElementById("players");div.innerHTML="";state.players.forEach((p,i)=>{const initials=(p.name||"?").substring(0,1).toUpperCase();const row=document.createElement("div");row.className="leader "+(i===0?"first":"");row.innerHTML=`<div><span class="avatar">${i===0?"👑":initials}</span><span class="name ${p.alive?'':'dead'}">${p.name}${p.isHost?' · anfitrión':''}</span><br><span class="lives">❤ ${p.lives}</span></div><div class="score">${p.score} pts</div>`;div.appendChild(row);});}
+function renderQuestion(){const q=state.currentQuestion;if(lastQuestionId!==q.id||state.phase==="question"){answerRevealed=null;lastQuestionId=q.id;hintVisible=false;document.getElementById("feedback").innerHTML="";document.getElementById("effectPanel").classList.add("hidden");document.getElementById("sideMsg").innerText="Elige antes de responder para analizar mejor el problema.";document.querySelectorAll(".sideBtn").forEach(b=>{b.className="sideBtn";});document.getElementById("visualHint").innerText="";}document.getElementById("qType").innerText=q.type==="bonus"?"🔥 PREGUNTA BONUS":"⭐ PREGUNTA NORMAL";document.getElementById("qTitle").innerText=q.title;document.getElementById("scenario").innerText=q.scenario;document.getElementById("question").innerText=q.question;document.getElementById("visual").innerHTML=sceneSVG(q);const opts=document.getElementById("options");opts.innerHTML="";q.options.forEach((opt,idx)=>{const btn=document.createElement("button");btn.className="option";btn.innerHTML=`<strong>${String.fromCharCode(65+idx)}.</strong> ${opt}`;btn.dataset.value=opt;btn.onclick=()=>submitAnswer(btn,opt);opts.appendChild(btn);});}
+function submitAnswer(btn,opt){socket.emit("submitAnswer",{answer:opt});document.querySelectorAll(".option").forEach(b=>b.disabled=true);btn.style.outline="4px solid #FEC84B";}
+function renderReveal(){if(!answerRevealed)return;document.querySelectorAll(".option").forEach(b=>{b.disabled=true;if(b.dataset.value===answerRevealed.answer)b.classList.add("correct");});showFeedback(`<div class="feedback ok">✅ Respuesta correcta: ${answerRevealed.answer}<div class="explanation">${answerRevealed.explanation}</div></div>`);}
+function showFeedback(html){document.getElementById("feedback").innerHTML=html;}
+function expectedSide(q){return q.target==="hypotenuse"?"hypotenuse":"cathetus";}
+function checkSide(side,btn){const exp=expectedSide(state.currentQuestion);document.querySelectorAll(".sideBtn").forEach(b=>b.className="sideBtn");btn.classList.add(side===exp?"good":"bad");document.getElementById("sideMsg").innerText=side===exp?"¡Correcto! Primero identificaste qué lado se busca.":"Revisa el contexto: no siempre se busca la hipotenusa.";}
+function toggleHint(){hintVisible=!hintVisible;const q=state.currentQuestion;const exp=expectedSide(q);document.getElementById("visualHint").innerText=hintVisible?(exp==="hypotenuse"?"Pista: se conocen los dos catetos y se busca el lado inclinado o diagonal.":"Pista: se conoce la hipotenusa y un cateto; debes encontrar el otro cateto restando cuadrados."):"";}
+function renderEffectPanel(){const panel=document.getElementById("effectPanel");const targets=document.getElementById("effectTargets");targets.innerHTML="";const opponents=state.players.filter(p=>p.id!==myId&&p.alive);if(!opponents.length){targets.innerHTML="<p>No hay oponentes vivos para aplicar efecto.</p>";return;}opponents.forEach(p=>{const box=document.createElement("div");box.className="leader";box.innerHTML=`<strong>${p.name}</strong><div><button class="danger" onclick="applyEffect('life','${p.id}')">💔 Quitar vida</button> <button class="yellow" onclick="applyEffect('freeze','${p.id}')">🧊 Congelar</button> <button class="secondary" onclick="applyEffect('steal','${p.id}')">💰 Robar pts</button></div>`;targets.appendChild(box);});panel.classList.remove("hidden");}
 function applyEffect(effect,targetId){socket.emit("applyEffect",{effect,targetId});document.getElementById("effectPanel").classList.add("hidden");}
-function startCountdown(){
-  clearInterval(countdown);
-  const timer=document.getElementById("timer");
-  timer.classList.remove("low");
-  if(!state || !state.questionEndsAt){timer.innerText="";return;}
-  countdown=setInterval(()=>{
-    const left=Math.max(0,Math.ceil((state.questionEndsAt-Date.now())/1000));
-    timer.innerText="⏱ "+left+" s";
-    timer.classList.toggle("low",left<=10);
-    if(left<=0)clearInterval(countdown);
-  },250);
-}
-function popConfetti(){
-  const colors=["#F04438","#FEC84B","#12B76A","#155EEF","#7A5AF8","#06B6D4"];
-  for(let i=0;i<22;i++){
-    const c=document.createElement("div"); c.className="confetti";
-    c.style.left=Math.random()*100+"vw"; c.style.background=colors[Math.floor(Math.random()*colors.length)];
-    c.style.animationDelay=Math.random()*.2+"s";
-    document.body.appendChild(c); setTimeout(()=>c.remove(),1400);
-  }
-}
-
-function sceneType(q){
-  const t=(q.title+" "+q.scenario+" "+q.question).toLowerCase();
-  if(t.includes("maleta")) return "suitcase";
-  if(t.includes("tirolesa")) return "zipline";
-  if(t.includes("escalera") || t.includes("pintor")) return "ladder";
-  if(t.includes("cable") || t.includes("poste") || t.includes("antena")) return "cable";
-  if(t.includes("cancha")) return "field";
-  if(t.includes("terreno")) return "land";
-  if(t.includes("pantalla") || t.includes("televisor")) return "screen";
-  if(t.includes("cuadro") || t.includes("lona")) return "frame";
-  if(t.includes("rampa") || t.includes("puente") || t.includes("patinetas")) return "ramp";
-  if(t.includes("dron")) return "drone";
-  if(t.includes("bandera")) return "flag";
-  if(t.includes("ambulancia")) return "ambulance";
-  if(t.includes("ciclista")) return "bike";
-  if(t.includes("mensajero") || t.includes("patrulla") || t.includes("parque") || t.includes("ruta")) return "route";
-  if(t.includes("tesoro")) return "treasure";
-  if(t.includes("techo")) return "roof";
-  return "default";
-}
-function sceneSVG(q){
-  const type=sceneType(q);
-  const unknown=expectedSide(q);
-  const titleEsc=q.title.replace(/&/g,"&amp;").replace(/</g,"&lt;");
-  const bg=`<defs>
-    <linearGradient id="sky" x1="0" x2="1"><stop offset="0" stop-color="#EAF4FF"/><stop offset="1" stop-color="#D1FADF"/></linearGradient>
-    <linearGradient id="sun" x1="0" x2="1"><stop offset="0" stop-color="#FEC84B"/><stop offset="1" stop-color="#FB6514"/></linearGradient>
-    <filter id="sh"><feDropShadow dx="0" dy="8" stdDeviation="6" flood-opacity=".18"/></filter>
-  </defs>
-  <rect width="650" height="390" rx="24" fill="url(#sky)"/>
-  <circle cx="585" cy="55" r="28" fill="url(#sun)" opacity=".85"/>
-  <text x="24" y="36" font-size="21" font-weight="900" fill="#083344">${titleEsc}</text>`;
-  const labelUnknown = unknown==="hipotenusa" ? "?" : "";
-  function tri(x1,y1,x2,y2,x3,y3, obj=""){
-    const midHx=(x1+x3)/2, midHy=(y1+y3)/2;
-    const midBx=(x1+x2)/2, midBy=(y1+y2)/2;
-    const midVx=(x2+x3)/2, midVy=(y2+y3)/2;
-    return `
-    <line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#155EEF" stroke-width="9" stroke-linecap="round"/>
-    <line x1="${x2}" y1="${y2}" x2="${x3}" y2="${y3}" stroke="#12B76A" stroke-width="9" stroke-linecap="round"/>
-    <line x1="${x1}" y1="${y1}" x2="${x3}" y2="${y3}" stroke="#F04438" stroke-width="9" stroke-dasharray="14 10" stroke-linecap="round"/>
-    <rect x="${x2-26}" y="${y2-26}" width="26" height="26" fill="none" stroke="#101828" stroke-width="4"/>
-    <circle cx="${x1}" cy="${y1}" r="10" fill="#101828"/><circle cx="${x2}" cy="${y2}" r="10" fill="#101828"/><circle cx="${x3}" cy="${y3}" r="10" fill="#101828"/>
-    <text x="${midBx-20}" y="${midBy+34}" font-size="20" font-weight="900" fill="#155EEF">${unknown==="cateto" ? "cateto ?" : "cateto"}</text>
-    <text x="${midVx+18}" y="${midVy}" font-size="20" font-weight="900" fill="#12B76A">${unknown==="cateto" ? "cateto ?" : "cateto"}</text>
-    <text x="${midHx-30}" y="${midHy-12}" font-size="20" font-weight="900" fill="#F04438">hipotenusa ${labelUnknown}</text>
-    ${obj}`;
-  }
-  if(type==="suitcase"){
-    return `<svg viewBox="0 0 650 390">${bg}
-      <rect x="115" y="115" width="320" height="205" rx="26" fill="#7A4F2A" stroke="#4A2E18" stroke-width="6" filter="url(#sh)"/>
-      <rect x="210" y="88" width="130" height="42" rx="20" fill="none" stroke="#4A2E18" stroke-width="8"/>
-      <line x1="125" y1="310" x2="425" y2="310" stroke="#155EEF" stroke-width="8"/>
-      <line x1="425" y1="310" x2="425" y2="120" stroke="#12B76A" stroke-width="8"/>
-      <line x1="125" y1="310" x2="425" y2="120" stroke="#F04438" stroke-width="9" stroke-dasharray="14 10"/>
-      <text x="220" y="350" font-size="20" font-weight="900" fill="#155EEF">ancho</text>
-      <text x="445" y="220" font-size="20" font-weight="900" fill="#12B76A">alto</text>
-      <text x="235" y="205" font-size="23" font-weight="900" fill="#F04438">diagonal ?</text>
-      <text x="485" y="305" font-size="48">🧳</text>
-      <text x="35" y="365" font-size="18" font-weight="800" fill="#475467">Contexto: la diagonal frontal de una maleta rectangular.</text>
-    </svg>`;
-  }
-  if(type==="screen"){
-    return `<svg viewBox="0 0 650 390">${bg}
-      <rect x="120" y="90" width="360" height="215" rx="14" fill="#101828" filter="url(#sh)"/>
-      <rect x="140" y="110" width="320" height="175" rx="8" fill="#B9E6FE"/>
-      <line x1="140" y1="285" x2="460" y2="110" stroke="#F04438" stroke-width="9" stroke-dasharray="14 10"/>
-      <line x1="140" y1="285" x2="460" y2="285" stroke="#155EEF" stroke-width="7"/>
-      <line x1="460" y1="285" x2="460" y2="110" stroke="#12B76A" stroke-width="7"/>
-      <text x="240" y="210" font-size="25" font-weight="900" fill="#F04438">diagonal ?</text>
-      <text x="502" y="180" font-size="52">📺</text>
-      <text x="35" y="365" font-size="18" font-weight="800" fill="#475467">Contexto: diagonal de una pantalla rectangular.</text>
-    </svg>`;
-  }
-  if(type==="ladder"){
-    return `<svg viewBox="0 0 650 390">${bg}
-      <rect x="455" y="90" width="25" height="235" fill="#98A2B3"/>
-      <rect x="70" y="325" width="520" height="20" fill="#667085"/>
-      ${tri(145,325,455,325,455,120,'<text x="270" y="190" font-size="48">🪜</text><text x="498" y="125" font-size="38">🏠</text>')}
-      <text x="35" y="365" font-size="18" font-weight="800" fill="#475467">Contexto: escalera apoyada en una pared; puede buscarse altura o escalera.</text>
-    </svg>`;
-  }
-  if(type==="cable" || type==="zipline"){
-    return `<svg viewBox="0 0 650 390">${bg}
-      <rect x="470" y="95" width="22" height="235" fill="#667085"/>
-      <rect x="88" y="328" width="490" height="18" fill="#475467"/>
-      ${tri(135,328,480,328,480,105,'<text x="500" y="105" font-size="42">⚡</text><text x="80" y="320" font-size="42">🧰</text>')}
-      <text x="35" y="365" font-size="18" font-weight="800" fill="#475467">Contexto: cable, poste o tirolesa formando un triángulo rectángulo.</text>
-    </svg>`;
-  }
-  if(type==="ramp"){
-    return `<svg viewBox="0 0 650 390">${bg}
-      <rect x="85" y="325" width="500" height="18" fill="#667085"/>
-      <polygon points="140,325 490,325 490,145" fill="#FEDF89" stroke="#F79009" stroke-width="5" filter="url(#sh)"/>
-      <line x1="140" y1="325" x2="490" y2="145" stroke="#F04438" stroke-width="9" stroke-dasharray="14 10"/>
-      <line x1="140" y1="325" x2="490" y2="325" stroke="#155EEF" stroke-width="8"/>
-      <line x1="490" y1="325" x2="490" y2="145" stroke="#12B76A" stroke-width="8"/>
-      <text x="245" y="365" font-size="20" font-weight="900" fill="#155EEF">${unknown==="cateto"?"base ?":"base"}</text>
-      <text x="508" y="235" font-size="20" font-weight="900" fill="#12B76A">${unknown==="cateto"?"altura ?":"altura"}</text>
-      <text x="270" y="230" font-size="24" font-weight="900" fill="#F04438">rampa</text>
-      <text x="72" y="315" font-size="46">♿</text>
-      <text x="35" y="365" font-size="18" font-weight="800" fill="#475467">Contexto: rampa; a veces se busca la base o la altura, no la hipotenusa.</text>
-    </svg>`;
-  }
-  if(type==="field"){
-    return `<svg viewBox="0 0 650 390">${bg}
-      <rect x="110" y="80" width="410" height="250" rx="12" fill="#65C466" stroke="#0E7A3E" stroke-width="6" filter="url(#sh)"/>
-      <line x1="315" y1="80" x2="315" y2="330" stroke="white" stroke-width="4"/>
-      <circle cx="315" cy="205" r="46" fill="none" stroke="white" stroke-width="4"/>
-      <line x1="110" y1="330" x2="520" y2="80" stroke="#F04438" stroke-width="9" stroke-dasharray="14 10"/>
-      <text x="265" y="190" font-size="25" font-weight="900" fill="#F04438">diagonal ?</text>
-      <text x="535" y="105" font-size="46">⚽</text>
-      <text x="35" y="365" font-size="18" font-weight="800" fill="#475467">Contexto: diagonal de una cancha rectangular.</text>
-    </svg>`;
-  }
-  if(type==="land" || type==="frame"){
-    return `<svg viewBox="0 0 650 390">${bg}
-      <rect x="130" y="95" width="360" height="220" rx="10" fill="#D1FADF" stroke="#12B76A" stroke-width="6" filter="url(#sh)"/>
-      <line x1="130" y1="315" x2="490" y2="95" stroke="#F04438" stroke-width="9" stroke-dasharray="14 10"/>
-      <line x1="130" y1="315" x2="490" y2="315" stroke="#155EEF" stroke-width="7"/>
-      <line x1="490" y1="315" x2="490" y2="95" stroke="#12B76A" stroke-width="7"/>
-      <text x="260" y="210" font-size="25" font-weight="900" fill="#F04438">diagonal ?</text>
-      <text x="510" y="132" font-size="48">${type==="land"?"🏡":"🖼️"}</text>
-      <text x="35" y="365" font-size="18" font-weight="800" fill="#475467">Contexto: rectángulo; la diagonal se obtiene con Pitágoras.</text>
-    </svg>`;
-  }
-  if(type==="drone"){
-    return `<svg viewBox="0 0 650 390">${bg}
-      <rect x="105" y="110" width="390" height="210" rx="14" fill="#65C466" stroke="#0E7A3E" stroke-width="6"/>
-      ${tri(130,315,500,315,500,125,'<text x="510" y="120" font-size="50">🚁</text><text x="110" y="300" font-size="34">📍</text>')}
-      <text x="35" y="365" font-size="18" font-weight="800" fill="#475467">Contexto: desplazamiento este/norte de un dron.</text>
-    </svg>`;
-  }
-  if(type==="flag"){
-    return `<svg viewBox="0 0 650 390">${bg}
-      <rect x="470" y="90" width="18" height="240" fill="#667085"/>
-      <polygon points="488,92 585,120 488,150" fill="#F04438"/>
-      ${tri(145,330,480,330,480,100,'<text x="85" y="325" font-size="42">🏫</text>')}
-      <text x="35" y="365" font-size="18" font-weight="800" fill="#475467">Contexto: cuerda desde la punta de un asta de bandera.</text>
-    </svg>`;
-  }
-  if(type==="ambulance" || type==="bike" || type==="route" || type==="treasure"){
-    const icon = type==="ambulance" ? "🚑" : type==="bike" ? "🚴" : type==="treasure" ? "🏴‍☠️" : "📍";
-    return `<svg viewBox="0 0 650 390">${bg}
-      <path d="M90 315 H520" stroke="#98A2B3" stroke-width="26" stroke-linecap="round"/>
-      <path d="M500 315 V105" stroke="#98A2B3" stroke-width="26" stroke-linecap="round"/>
-      ${tri(115,315,500,315,500,115,`<text x="70" y="312" font-size="48">${icon}</text><text x="510" y="115" font-size="44">🎯</text>`)}
-      <text x="35" y="365" font-size="18" font-weight="800" fill="#475467">Contexto: ruta con desplazamientos perpendiculares.</text>
-    </svg>`;
-  }
-  if(type==="roof"){
-    return `<svg viewBox="0 0 650 390">${bg}
-      <rect x="170" y="250" width="310" height="85" fill="#D0D5DD" stroke="#667085" stroke-width="5"/>
-      <polygon points="150,250 495,250 495,120" fill="#FEDF89" stroke="#F79009" stroke-width="5"/>
-      <line x1="150" y1="250" x2="495" y2="120" stroke="#F04438" stroke-width="9" stroke-dasharray="14 10"/>
-      <line x1="150" y1="250" x2="495" y2="250" stroke="#155EEF" stroke-width="7"/>
-      <line x1="495" y1="250" x2="495" y2="120" stroke="#12B76A" stroke-width="7"/>
-      <text x="510" y="190" font-size="20" font-weight="900" fill="#12B76A">altura ?</text>
-      <text x="290" y="175" font-size="24" font-weight="900" fill="#F04438">techo</text>
-      <text x="35" y="365" font-size="18" font-weight="800" fill="#475467">Contexto: techo inclinado; se puede buscar la altura.</text>
-    </svg>`;
-  }
-  return `<svg viewBox="0 0 650 390">${bg}${tri(120,315,500,315,500,115,'<text x="510" y="120" font-size="44">📐</text>')}<text x="35" y="365" font-size="18" font-weight="800" fill="#475467">Contexto: triángulo rectángulo en una situación cotidiana.</text></svg>`;
-}
+function startCountdown(){clearInterval(countdown);const timer=document.getElementById("timer");timer.classList.remove("low");if(!state||!state.questionEndsAt){timer.innerText="";return;}countdown=setInterval(()=>{const left=Math.max(0,Math.ceil((state.questionEndsAt-Date.now())/1000));timer.innerText="⏱ "+left+" s";timer.classList.toggle("low",left<=10);if(left<=0)clearInterval(countdown);},250);}
+function popConfetti(){const colors=["#F04438","#FEC84B","#12B76A","#155EEF","#7A5AF8","#06B6D4"];for(let i=0;i<22;i++){const c=document.createElement("div");c.className="confetti";c.style.left=Math.random()*100+"vw";c.style.background=colors[Math.floor(Math.random()*colors.length)];c.style.animationDelay=Math.random()*.2+"s";document.body.appendChild(c);setTimeout(()=>c.remove(),1400);}}
+function sceneSVG(q){const v=q.visual||{base:"cateto",height:"cateto",hyp:"?"};const target=q.target;const scene=q.scene||"default";const title=q.title.replace(/&/g,"&amp;").replace(/</g,"&lt;");const ctx=contextText(scene);const icon=contextIcon(scene);const baseUnknown=target==="base";const heightUnknown=target==="height";const hypUnknown=target==="hypotenuse";const base=v.base||"";const height=v.height||"";const hyp=v.hyp||"";return `<svg viewBox="0 0 680 410"><defs><linearGradient id="bg" x1="0" x2="1"><stop offset="0" stop-color="#EAF4FF"/><stop offset="1" stop-color="#D1FADF"/></linearGradient><linearGradient id="obj" x1="0" x2="1"><stop offset="0" stop-color="#FEC84B"/><stop offset="1" stop-color="#FB6514"/></linearGradient><filter id="sh"><feDropShadow dx="0" dy="10" stdDeviation="8" flood-opacity=".20"/></filter></defs><rect width="680" height="410" rx="26" fill="url(#bg)"/><circle cx="610" cy="60" r="34" fill="url(#obj)" opacity=".80"/><text x="24" y="38" font-size="22" font-weight="900" fill="#083344">${title}</text>${sceneObject(scene)}<g transform="translate(70,60)">${triangleLayer(base,height,hyp,baseUnknown,heightUnknown,hypUnknown)}</g><text x="38" y="385" font-size="18" font-weight="800" fill="#475467">${icon} ${ctx}</text></svg>`;}
+function triangleLayer(base,height,hyp,baseUnknown,heightUnknown,hypUnknown){const qBase=baseUnknown?"?":base;const qHeight=heightUnknown?"?":height;const qHyp=hypUnknown?"?":hyp;return `<line x1="80" y1="275" x2="455" y2="275" stroke="#155EEF" stroke-width="10" stroke-linecap="round"/><line x1="455" y1="275" x2="455" y2="75" stroke="#12B76A" stroke-width="10" stroke-linecap="round"/><line x1="80" y1="275" x2="455" y2="75" stroke="#F04438" stroke-width="11" stroke-dasharray="16 10" stroke-linecap="round"/><rect x="427" y="247" width="28" height="28" fill="rgba(255,255,255,.7)" stroke="#101828" stroke-width="4"/><circle cx="80" cy="275" r="11" fill="#101828"/><circle cx="455" cy="275" r="11" fill="#101828"/><circle cx="455" cy="75" r="11" fill="#101828"/><text x="220" y="318" font-size="22" font-weight="900" fill="#155EEF">base: ${qBase}</text><text x="472" y="178" font-size="22" font-weight="900" fill="#12B76A">altura: ${qHeight}</text><text x="215" y="155" font-size="23" font-weight="900" fill="#F04438">diagonal: ${qHyp}</text>${baseUnknown?unknownGlow(267,275):""}${heightUnknown?unknownGlow(455,175):""}${hypUnknown?unknownGlow(267,175):""}`;}
+function unknownGlow(x,y){return `<circle cx="${x}" cy="${y}" r="32" fill="none" stroke="#FEC84B" stroke-width="6"><animate attributeName="r" values="25;38;25" dur="1.2s" repeatCount="indefinite"/></circle>`;}
+function sceneObject(scene){const map={suitcase:"🧳",screen:"📺",ladder:"🪜",cable:"⚡",zipline:"🧗",field:"⚽",ramp:"♿",drone:"🚁",flag:"🏳️",ambulance:"🚑",bike:"🚴",river:"🚤",land:"🏡",frame:"🖼️",antenna:"📡",gate:"🚪",skate:"🛹",tablet:"📱",tent:"⛺",city:"🏙️",tower:"🛝",door:"🚪",window:"🪟",billboard:"📢",stage:"🎭",treasure:"🏴‍☠️",roof:"🏠",default:"📐"};const emoji=map[scene]||map.default;return `<g filter="url(#sh)"><rect x="505" y="120" width="120" height="120" rx="28" fill="rgba(255,255,255,.70)" stroke="#D0D5DD" stroke-width="3"/><text x="528" y="198" font-size="64">${emoji}</text></g>`;}
+function contextIcon(scene){return ({suitcase:"🧳",screen:"📺",ladder:"🪜",cable:"⚡",zipline:"🧗",field:"⚽",ramp:"♿",drone:"🚁",flag:"🏳️",ambulance:"🚑",bike:"🚴",river:"🚤",land:"🏡",frame:"🖼️",antenna:"📡",gate:"🚪",skate:"🛹",tablet:"📱",tent:"⛺",city:"🏙️",tower:"🛝",door:"🚪",window:"🪟",billboard:"📢",stage:"🎭",treasure:"🏴‍☠️",roof:"🏠"}[scene]||"📐");}
+function contextText(scene){return ({suitcase:"Contexto: diagonal frontal de una maleta rectangular.",screen:"Contexto: pantalla rectangular; puede buscarse diagonal o altura.",ladder:"Contexto: escalera apoyada en pared.",cable:"Contexto: poste y cable formando triángulo rectángulo.",zipline:"Contexto: cable de tirolesa entre plataforma y suelo.",field:"Contexto: diagonal de una cancha rectangular.",ramp:"Contexto: rampa; puede buscarse base o altura.",drone:"Contexto: desplazamiento horizontal y altura/distancia del dron.",flag:"Contexto: cuerda desde la punta de un asta.",ambulance:"Contexto: ruta de emergencia con calles perpendiculares.",bike:"Contexto: desplazamiento de ciclista en dos direcciones.",river:"Contexto: rescate con desplazamientos perpendiculares.",land:"Contexto: terreno rectangular y diagonal.",frame:"Contexto: marco, mural o lona rectangular.",antenna:"Contexto: antena y cable tensor.",gate:"Contexto: portón rectangular.",skate:"Contexto: rampa de patinetas.",tablet:"Contexto: pantalla de una tablet.",tent:"Contexto: carpa triangular.",city:"Contexto: ruta entre edificios.",tower:"Contexto: tobogán y torre de juegos.",door:"Contexto: diagonal de una puerta.",window:"Contexto: ventana rectangular.",billboard:"Contexto: anuncio rectangular.",stage:"Contexto: escenario rectangular.",treasure:"Contexto: mapa con recorridos perpendiculares.",roof:"Contexto: techo inclinado y altura."}[scene]||"Contexto: situación cotidiana con triángulo rectángulo.");}
 </script>
 </body>
 </html>
