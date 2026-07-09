@@ -1,0 +1,45 @@
+MISIÓN PITÁGORAS MULTIJUGADOR - INSTRUCCIONES FÁCILES
+
+IMPORTANTE:
+Este juego NO se puede subir como una página normal a Google Drive o GitHub Pages, porque es multijugador en tiempo real.
+Para que todos compitan al mismo tiempo necesita un servidor.
+
+OPCIÓN MÁS FÁCIL PARA PERSONAS NO TECNOLÓGICAS: REPLIT
+
+1. Entrar a https://replit.com
+2. Crear una cuenta o iniciar sesión.
+3. Crear una nueva App/Proyecto de Node.js.
+4. Subir todos los archivos de esta carpeta al proyecto.
+5. Presionar el botón RUN.
+6. Replit mostrará una vista previa del sitio.
+7. Copiar el enlace de la vista previa o el enlace público.
+8. Enviar ese enlace a los compañeros.
+9. Todos escriben su nombre y el mismo código de sala, por ejemplo: CLASE.
+10. El primer jugador que entra queda como anfitrión y puede iniciar la partida.
+
+OPCIÓN PARA PUBLICARLO MÁS FORMAL: RENDER
+
+1. Crear una cuenta en https://render.com
+2. Subir este proyecto a GitHub.
+3. En Render, crear un nuevo Web Service.
+4. Conectar el repositorio de GitHub.
+5. Render detectará el archivo render.yaml.
+6. Publicar el servicio.
+7. Compartir el enlace generado por Render.
+
+CÓMO USARLO EN LA EXPOSICIÓN:
+- Abrir el enlace del juego.
+- Pedir a todos que entren con su nombre.
+- Usar el mismo código de sala, por ejemplo: UISIL.
+- Iniciar la partida.
+- Cada jugador tiene 3 vidas.
+- Si falla 3 veces queda eliminado.
+- Las preguntas bonus permiten aplicar efectos contra oponentes.
+
+REGLAS DEL JUEGO:
+- Pregunta normal correcta: 100 puntos.
+- Pregunta bonus correcta: 300 puntos.
+- Efectos bonus:
+  1. Quitar 1 vida.
+  2. Congelar 10 segundos.
+  3. Robar 150 puntos.

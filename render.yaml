@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: mision-pitagoras-multijugador
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start

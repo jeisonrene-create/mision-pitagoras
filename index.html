@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Misión Pitágoras Multijugador</title>
+<style>
+:root{--azul:#0b3d91;--azul2:#1769c2;--celeste:#eaf4ff;--verde:#12a150;--rojo:#d62828;--amarillo:#ffd166;--gris:#f4f6f8;--texto:#1f2937}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#eaf4ff,#fff);color:var(--texto)}
+header{background:var(--azul);color:white;padding:18px;text-align:center;border-bottom:6px solid var(--amarillo)}
+header h1{margin:0;font-size:2rem}.container{max-width:1180px;margin:18px auto;padding:0 14px 40px}
+.card{background:white;border-radius:18px;box-shadow:0 8px 24px #0002;padding:20px;margin-bottom:16px;border:1px solid #d7e6f8}
+.grid{display:grid;grid-template-columns:1.5fr .9fr;gap:16px}.hidden{display:none!important}
+input{width:100%;padding:12px;border:2px solid #bfd7f5;border-radius:12px;font-size:1rem;margin:8px 0 12px}
+button{border:none;border-radius:12px;padding:12px 16px;font-size:1rem;font-weight:700;cursor:pointer;transition:.2s}
+button:hover{transform:translateY(-1px)}button:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.primary{background:var(--azul2);color:white}.secondary{background:#e5eef9;color:var(--azul)}.danger{background:var(--rojo);color:white}.success{background:var(--verde);color:white}.yellow{background:var(--amarillo);color:#111}
+.badge,.pill{display:inline-block;border-radius:999px;padding:8px 12px;font-weight:700;margin:4px;background:var(--celeste);color:var(--azul);border:1px solid #b8d8ff}
+.questionTitle{color:var(--azul);margin:4px 0}.scenario{background:var(--gris);border-left:6px solid var(--azul2);border-radius:12px;padding:14px;line-height:1.5;font-size:1.05rem}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}.option{background:#f7fbff;color:#111827;border:2px solid #c8ddf7;text-align:left}
+.option.correct{background:#dcfce7;border-color:#22c55e}.option.wrong{background:#fee2e2;border-color:#ef4444}
+.leader{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid #d8e8fb;border-radius:12px;padding:10px;margin:8px 0;background:#fbfdff}
+.name{font-weight:800}.dead{opacity:.5;text-decoration:line-through}.lives{color:var(--rojo);font-weight:800}.score{color:var(--azul);font-weight:800}
+.feedback{margin-top:14px;border-radius:12px;padding:14px;font-weight:bold;line-height:1.45}.ok{background:#dcfce7;color:#14532d}.no{background:#fee2e2;color:#7f1d1d}.info{background:#fff7db;color:#713f12}
+.explanation{margin-top:8px;font-weight:normal;background:white;border-radius:10px;padding:10px;color:#111827}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.timer{font-size:1.15rem;font-weight:900;color:var(--rojo)}
+.effectPanel{border:2px dashed #f59e0b;background:#fff7db;border-radius:16px;padding:14px;margin-top:14px}
+.small{font-size:.92rem;color:#4b5563}.visual{display:flex;justify-content:center;margin:12px 0}svg{max-width:560px;width:100%;border:1px solid #d7e6f8;border-radius:14px;background:#fff}
+@media(max-width:850px){.grid{grid-template-columns:1fr}.options{grid-template-columns:1fr}header h1{font-size:1.5rem}}
+</style>
+</head>
+<body>
+<header><h1>🎮 Misión Pitágoras Multijugador</h1><p>3 vidas · preguntas bonus · efectos contra oponentes</p></header>
+
+<div class="container">
+<section id="join" class="card">
+<h2>Entrar a la competencia</h2>
+<p>Escribe tu nombre y el código de sala. Todos deben usar el mismo código.</p>
+<label>Nombre de usuario</label><input id="name" placeholder="Ejemplo: Jeison"/>
+<label>Código de sala</label><input id="room" value="CLASE"/>
+<button class="primary" onclick="joinRoom()">Entrar</button>
+<p class="small">El primer jugador que entra queda como anfitrión y puede iniciar el juego.</p>
+</section>
+
+<section id="main" class="hidden">
+<div class="grid">
+<div class="card">
+<div class="top"><div><span class="pill" id="roomLabel"></span><span class="pill" id="phaseLabel"></span></div><div class="timer" id="timer"></div></div>
+
+<div id="lobby">
+<h2>Sala de espera</h2>
+<p>Cuando todos estén conectados, el anfitrión inicia la partida.</p>
+<button id="startBtn" class="success hidden" onclick="startGame()">Iniciar partida</button>
+</div>
+
+<div id="questionBox" class="hidden">
+<span class="badge" id="qType"></span>
+<h2 class="questionTitle" id="qTitle"></h2>
+<div class="scenario" id="scenario"></div>
+<div class="visual" id="visual"></div>
+<h3 id="question"></h3>
+<div class="options" id="options"></div>
+<div id="feedback"></div>
+<div id="effectPanel" class="effectPanel hidden">
+<h3>🔥 Pregunta bonus correcta</h3>
+<p>Elige un efecto negativo para aplicar a un oponente:</p>
+<div id="effectTargets"></div>
+</div>
+</div>
+
+<div id="ended" class="hidden">
+<h2>🏁 Partida finalizada</h2>
+<p>Revisa la tabla de posiciones. El anfitrión puede reiniciar con una nueva ronda.</p>
+<button id="restartBtn" class="primary hidden" onclick="startGame()">Nueva ronda</button>
+</div>
+</div>
+
+<div class="card">
+<h2>Tabla de jugadores</h2>
+<div id="players"></div>
+<div class="feedback info">
+<strong>Reglas:</strong>
+<div class="explanation">
+Cada jugador inicia con 3 vidas. Cada error resta 1 vida. Si pierdes las 3 vidas, quedas fuera y debes esperar una nueva ronda.
+Las preguntas normales valen 100 puntos. Las bonus valen 300 puntos y permiten activar un efecto contra un oponente.
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const socket = io();
+let myId=null, state=null, answerRevealed=null, countdown=null;
+
+function joinRoom(){
+  const name=document.getElementById("name").value.trim() || "Jugador";
+  const roomCode=document.getElementById("room").value.trim() || "CLASE";
+  socket.emit("joinRoom",{name,roomCode},(res)=>{
+    if(res.ok){myId=res.id;document.getElementById("join").classList.add("hidden");document.getElementById("main").classList.remove("hidden");}
+  });
+}
+function startGame(){socket.emit("startGame");}
+socket.on("roomState",(s)=>{state=s;render();});
+socket.on("answerReveal",(data)=>{answerRevealed=data;renderReveal();});
+socket.on("effectNotice",(msg)=>{showFeedback(`<div class="feedback no">${msg}</div>`);});
+socket.on("chooseEffect",()=>{renderEffectPanel();});
+
+function render(){
+  if(!state)return;
+  document.getElementById("roomLabel").innerText="Sala: "+state.code;
+  document.getElementById("phaseLabel").innerText=phaseName(state.phase);
+  renderPlayers();
+  const me=state.players.find(p=>p.id===myId);
+  const isHost=me && me.isHost;
+  document.getElementById("startBtn").classList.toggle("hidden",!(state.phase==="lobby" && isHost));
+  document.getElementById("restartBtn").classList.toggle("hidden",!(state.phase==="ended" && isHost));
+  document.getElementById("lobby").classList.toggle("hidden",state.phase!=="lobby");
+  document.getElementById("ended").classList.toggle("hidden",state.phase!=="ended");
+  document.getElementById("questionBox").classList.toggle("hidden",!(state.phase==="question"||state.phase==="effect"||state.phase==="answer"));
+  if(state.currentQuestion) renderQuestion();
+  startCountdown();
+}
+function phaseName(p){
+  return p==="lobby"?"Sala de espera":p==="question"?"Pregunta activa":p==="effect"?"Bonus: elegir efecto":p==="answer"?"Revisión":"Finalizado";
+}
+function renderPlayers(){
+  const div=document.getElementById("players"); div.innerHTML="";
+  state.players.forEach((p,i)=>{
+    const row=document.createElement("div"); row.className="leader";
+    row.innerHTML=`<div><span class="name ${p.alive?'':'dead'}">${i+1}. ${p.name}${p.isHost?' 👑':''}</span><br><span class="lives">❤ ${p.lives}</span></div><div class="score">${p.score} pts</div>`;
+    div.appendChild(row);
+  });
+}
+function renderQuestion(){
+  answerRevealed=null;
+  const q=state.currentQuestion;
+  document.getElementById("qType").innerText=q.type==="bonus"?"PREGUNTA BONUS 🔥":"PREGUNTA NORMAL";
+  document.getElementById("qTitle").innerText=`${state.questionIndex+1}/${state.total} · ${q.title}`;
+  document.getElementById("scenario").innerText=q.scenario;
+  document.getElementById("question").innerText=q.question;
+  document.getElementById("feedback").innerHTML="";
+  document.getElementById("effectPanel").classList.add("hidden");
+  document.getElementById("visual").innerHTML=triangleSVG();
+  const opts=document.getElementById("options"); opts.innerHTML="";
+  q.options.forEach(opt=>{
+    const btn=document.createElement("button"); btn.className="option"; btn.innerText=opt;
+    btn.onclick=()=>submitAnswer(btn,opt);
+    opts.appendChild(btn);
+  });
+}
+function submitAnswer(btn,opt){
+  socket.emit("submitAnswer",{answer:opt});
+  document.querySelectorAll(".option").forEach(b=>b.disabled=true);
+  btn.style.outline="4px solid #ffd166";
+}
+function renderReveal(){
+  if(!answerRevealed)return;
+  document.querySelectorAll(".option").forEach(b=>{
+    b.disabled=true;
+    if(b.innerText===answerRevealed.answer)b.classList.add("correct");
+  });
+  showFeedback(`<div class="feedback ok">Respuesta correcta: ${answerRevealed.answer}<div class="explanation">${answerRevealed.explanation}</div></div>`);
+}
+function showFeedback(html){document.getElementById("feedback").innerHTML=html;}
+function renderEffectPanel(){
+  const panel=document.getElementById("effectPanel");
+  const targets=document.getElementById("effectTargets");
+  targets.innerHTML="";
+  const opponents=state.players.filter(p=>p.id!==myId && p.alive);
+  if(!opponents.length){targets.innerHTML="<p>No hay oponentes vivos para aplicar efecto.</p>";return;}
+  opponents.forEach(p=>{
+    const box=document.createElement("div");
+    box.className="leader";
+    box.innerHTML=`<strong>${p.name}</strong><div><button class="danger" onclick="applyEffect('life','${p.id}')">Quitar 1 vida</button> <button class="yellow" onclick="applyEffect('freeze','${p.id}')">Congelar 10 s</button> <button class="secondary" onclick="applyEffect('steal','${p.id}')">Robar 150 pts</button></div>`;
+    targets.appendChild(box);
+  });
+  panel.classList.remove("hidden");
+}
+function applyEffect(effect,targetId){socket.emit("applyEffect",{effect,targetId});document.getElementById("effectPanel").classList.add("hidden");}
+function startCountdown(){
+  clearInterval(countdown);
+  if(!state || !state.questionEndsAt){document.getElementById("timer").innerText="";return;}
+  countdown=setInterval(()=>{
+    const left=Math.max(0,Math.ceil((state.questionEndsAt-Date.now())/1000));
+    document.getElementById("timer").innerText="⏱ "+left+" s";
+    if(left<=0)clearInterval(countdown);
+  },300);
+}
+function triangleSVG(){
+return `<svg viewBox="0 0 520 310"><rect width="520" height="310" fill="#ffffff"/><line x1="80" y1="250" x2="390" y2="250" stroke="#1769c2" stroke-width="8"/><line x1="390" y1="250" x2="390" y2="75" stroke="#12a150" stroke-width="8"/><line x1="80" y1="250" x2="390" y2="75" stroke="#d62828" stroke-width="8" stroke-dasharray="12 8"/><rect x="365" y="225" width="25" height="25" fill="none" stroke="#111" stroke-width="4"/><text x="175" y="285" font-size="23" font-weight="bold" fill="#1769c2">cateto</text><text x="405" y="165" font-size="23" font-weight="bold" fill="#12a150">cateto</text><text x="180" y="140" font-size="23" font-weight="bold" fill="#d62828">hipotenusa</text><text x="90" y="42" font-size="24" font-weight="bold" fill="#0b3d91">a² + b² = c²</text></svg>`;
+}
+</script>
+</body>
+</html>

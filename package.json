@@ -1,0 +1,16 @@
+{
+  "name": "mision-pitagoras-multijugador",
+  "version": "1.0.0",
+  "description": "Juego multijugador para aplicar el Teorema de Pit\u00e1goras en situaciones cotidianas.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.3",
+    "socket.io": "^4.7.5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
