@@ -1,198 +1,39 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Misión Pitágoras Multijugador</title>
+<title>Misión Pitágoras Arena</title>
 <style>
-:root{--azul:#0b3d91;--azul2:#1769c2;--celeste:#eaf4ff;--verde:#12a150;--rojo:#d62828;--amarillo:#ffd166;--gris:#f4f6f8;--texto:#1f2937}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#eaf4ff,#fff);color:var(--texto)}
-header{background:var(--azul);color:white;padding:18px;text-align:center;border-bottom:6px solid var(--amarillo)}
-header h1{margin:0;font-size:2rem}.container{max-width:1180px;margin:18px auto;padding:0 14px 40px}
-.card{background:white;border-radius:18px;box-shadow:0 8px 24px #0002;padding:20px;margin-bottom:16px;border:1px solid #d7e6f8}
-.grid{display:grid;grid-template-columns:1.5fr .9fr;gap:16px}.hidden{display:none!important}
-input{width:100%;padding:12px;border:2px solid #bfd7f5;border-radius:12px;font-size:1rem;margin:8px 0 12px}
-button{border:none;border-radius:12px;padding:12px 16px;font-size:1rem;font-weight:700;cursor:pointer;transition:.2s}
-button:hover{transform:translateY(-1px)}button:disabled{opacity:.45;cursor:not-allowed;transform:none}
-.primary{background:var(--azul2);color:white}.secondary{background:#e5eef9;color:var(--azul)}.danger{background:var(--rojo);color:white}.success{background:var(--verde);color:white}.yellow{background:var(--amarillo);color:#111}
-.badge,.pill{display:inline-block;border-radius:999px;padding:8px 12px;font-weight:700;margin:4px;background:var(--celeste);color:var(--azul);border:1px solid #b8d8ff}
-.questionTitle{color:var(--azul);margin:4px 0}.scenario{background:var(--gris);border-left:6px solid var(--azul2);border-radius:12px;padding:14px;line-height:1.5;font-size:1.05rem}
-.options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}.option{background:#f7fbff;color:#111827;border:2px solid #c8ddf7;text-align:left}
-.option.correct{background:#dcfce7;border-color:#22c55e}.option.wrong{background:#fee2e2;border-color:#ef4444}
-.leader{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid #d8e8fb;border-radius:12px;padding:10px;margin:8px 0;background:#fbfdff}
-.name{font-weight:800}.dead{opacity:.5;text-decoration:line-through}.lives{color:var(--rojo);font-weight:800}.score{color:var(--azul);font-weight:800}
-.feedback{margin-top:14px;border-radius:12px;padding:14px;font-weight:bold;line-height:1.45}.ok{background:#dcfce7;color:#14532d}.no{background:#fee2e2;color:#7f1d1d}.info{background:#fff7db;color:#713f12}
-.explanation{margin-top:8px;font-weight:normal;background:white;border-radius:10px;padding:10px;color:#111827}
-.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.timer{font-size:1.15rem;font-weight:900;color:var(--rojo)}
-.effectPanel{border:2px dashed #f59e0b;background:#fff7db;border-radius:16px;padding:14px;margin-top:14px}
-.small{font-size:.92rem;color:#4b5563}.visual{display:flex;justify-content:center;margin:12px 0}svg{max-width:560px;width:100%;border:1px solid #d7e6f8;border-radius:14px;background:#fff}
-@media(max-width:850px){.grid{grid-template-columns:1fr}.options{grid-template-columns:1fr}header h1{font-size:1.5rem}}
+:root{--a:#071952;--b:#0B666A;--c:#35A29F;--blue:#155EEF;--green:#12B76A;--red:#F04438;--yellow:#FEC84B;--purple:#7A5AF8;--ink:#101828;--soft:#F2F4F7;--line:#D0D5DD}*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:radial-gradient(circle at 15% 0%,#fec84b55,transparent 32%),radial-gradient(circle at 90% 0%,#7a5af855,transparent 30%),linear-gradient(135deg,var(--a),var(--b) 55%,var(--c));min-height:100vh}body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background-image:linear-gradient(#fff4 1px,transparent 1px),linear-gradient(90deg,#fff4 1px,transparent 1px);background-size:42px 42px}header{text-align:center;color:#fff;padding:22px 15px 16px}header h1{margin:0;font-size:clamp(1.7rem,4vw,3rem);text-shadow:0 6px 20px #0007}header p{margin:8px 0 0;font-weight:bold;color:#eaf4ff}.container{position:relative;max-width:1240px;margin:auto;padding:0 14px 42px}.card{background:#fffffff0;border:1px solid #ffffff70;border-radius:26px;box-shadow:0 22px 60px #0004;padding:22px;margin-bottom:18px}.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:center}.grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(330px,.85fr);gap:18px}.hidden{display:none!important}.badge,.pill{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:8px 12px;font-weight:900;margin:4px;background:#eaf4ff;color:#084c61;border:1px solid #b9e6fe}.hot{background:#fff3d6;color:#7a2e0e;border-color:#fedf89}input{width:100%;padding:13px;border:2px solid #b9e6fe;border-radius:15px;font-size:1rem;margin:8px 0 12px}button{border:0;border-radius:15px;padding:13px 16px;font-size:1rem;font-weight:900;cursor:pointer;transition:.18s}button:hover{transform:translateY(-2px);filter:brightness(1.03)}button:disabled{opacity:.5;cursor:not-allowed;transform:none}.primary{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff}.secondary{background:#eaf4ff;color:#084c61}.danger{background:linear-gradient(135deg,var(--red),#fb6514);color:#fff}.success{background:linear-gradient(135deg,var(--green),#06b6d4);color:#fff}.yellow{background:linear-gradient(135deg,var(--yellow),#fdb022);color:#1d2939}.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.timer{font-size:1.15rem;font-weight:1000;color:#b42318;background:#fef3f2;border:1px solid #fecdca;padding:9px 13px;border-radius:999px;min-width:85px;text-align:center}.timer.low{animation:pulse .7s infinite;background:var(--red);color:white}@keyframes pulse{50%{transform:scale(1.06)}}.progressOuter{height:16px;background:#eaecf0;border-radius:999px;overflow:hidden;margin:14px 0}.progressBar{height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--yellow),var(--red));transition:.35s}.questionTitle{color:#083344;margin:8px 0;font-size:clamp(1.35rem,2.4vw,2rem)}.scenario{background:linear-gradient(135deg,#f8fbff,#eafcff);border-left:8px solid #06b6d4;border-radius:18px;padding:15px;line-height:1.55;font-size:1.08rem}.visualWrap{overflow:hidden;border-radius:24px;margin:14px 0;background:linear-gradient(135deg,#eaf4ff,#fff);border:1px solid var(--line)}.visual{display:flex;justify-content:center;padding:8px}svg{max-width:640px;width:100%}.question{font-size:1.12rem;font-weight:1000;margin:14px 0}.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}.option{background:white;color:#1d2939;border:2px solid var(--line);text-align:left;min-height:64px;box-shadow:0 10px 20px #10182814}.option:hover{border-color:var(--blue);box-shadow:0 12px 28px #155eef29}.option.correct{background:#ecfdf3;border-color:var(--green)}.option.wrong{background:#fef3f2;border-color:var(--red)}.feedback{margin-top:14px;border-radius:18px;padding:14px;font-weight:900;line-height:1.45}.ok{background:#ecfdf3;color:#05603a;border:1px solid #abefc6}.no{background:#fef3f2;color:#b42318;border:1px solid #fecdca}.info{background:#fffaeb;color:#93370d;border:1px solid #fedf89}.explanation{margin-top:9px;font-weight:600;background:white;border-radius:13px;padding:11px;color:#1d2939}.leader{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid #eaecf0;border-radius:18px;padding:11px;margin:9px 0;background:linear-gradient(135deg,#fff,#f8fbff)}.leader.first{border-color:var(--yellow);background:linear-gradient(135deg,#fffaeb,#fff)}.avatar{width:38px;height:38px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--blue),var(--purple));color:white;font-weight:1000;margin-right:8px}.name{font-weight:1000}.dead{opacity:.5;text-decoration:line-through}.lives{color:#b42318;font-weight:1000}.score{color:var(--blue);font-weight:1000}.effectPanel{border:2px dashed #f79009;background:#fffaeb;border-radius:22px;padding:14px;margin-top:14px}.teacherBox{background:#fffaeb;border:1px solid #fedf89;border-radius:18px;padding:14px;line-height:1.5}.floatingIcons{font-size:3rem;text-align:center;line-height:1.7}.floatIcon{display:inline-block;margin:6px;animation:floaty 2.5s infinite ease-in-out}.floatIcon:nth-child(2){animation-delay:.3s}.floatIcon:nth-child(3){animation-delay:.6s}.floatIcon:nth-child(4){animation-delay:.9s}@keyframes floaty{50%{transform:translateY(-10px) rotate(3deg)}}.confetti{position:fixed;top:-10px;width:10px;height:16px;z-index:9999;animation:fall 1.2s linear forwards}@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:.2}}@media(max-width:900px){.grid,.hero{grid-template-columns:1fr}.options{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<header><h1>🎮 Misión Pitágoras Multijugador</h1><p>3 vidas · preguntas bonus · efectos contra oponentes</p></header>
-
+<header><h1>⚡ Misión Pitágoras Arena 🎮</h1><p>Compite, conserva tus vidas y usa poderes en preguntas bonus</p></header>
 <div class="container">
-<section id="join" class="card">
-<h2>Entrar a la competencia</h2>
-<p>Escribe tu nombre y el código de sala. Todos deben usar el mismo código.</p>
-<label>Nombre de usuario</label><input id="name" placeholder="Ejemplo: Jeison"/>
-<label>Código de sala</label><input id="room" value="CLASE"/>
-<button class="primary" onclick="joinRoom()">Entrar</button>
-<p class="small">El primer jugador que entra queda como anfitrión y puede iniciar el juego.</p>
-</section>
-
-<section id="main" class="hidden">
-<div class="grid">
-<div class="card">
-<div class="top"><div><span class="pill" id="roomLabel"></span><span class="pill" id="phaseLabel"></span></div><div class="timer" id="timer"></div></div>
-
-<div id="lobby">
-<h2>Sala de espera</h2>
-<p>Cuando todos estén conectados, el anfitrión inicia la partida.</p>
-<button id="startBtn" class="success hidden" onclick="startGame()">Iniciar partida</button>
+<section id="join" class="card"><div class="hero"><div><span class="badge hot">9° año · Geometría · Teorema de Pitágoras</span><h2>Entrar a la competencia</h2><p>Escribe tu nombre y el código de sala. Todos deben usar el mismo código para competir juntos.</p><label><strong>Nombre de usuario</strong></label><input id="name" placeholder="Ejemplo: Jeison"/><label><strong>Código de sala</strong></label><input id="room" value="CLASE"/><button class="primary" onclick="joinRoom()">🚀 Entrar al juego</button></div><div><div class="floatingIcons"><span class="floatIcon">🚁</span><span class="floatIcon">🪜</span><span class="floatIcon">🏟️</span><span class="floatIcon">📐</span><span class="floatIcon">⚡</span><span class="floatIcon">🏆</span></div><div class="teacherBox"><strong>Dinámica:</strong> 3 vidas por jugador, 15 preguntas por partida y poderes especiales en preguntas bonus.</div></div></div></section>
+<section id="main" class="hidden"><div class="grid"><div class="card"><div class="top"><div><span class="pill" id="roomLabel"></span><span class="pill" id="phaseLabel"></span><span class="pill" id="roundLabel"></span></div><div class="timer" id="timer"></div></div><div class="progressOuter"><div class="progressBar" id="progressBar"></div></div><div id="lobby"><h2>🕹️ Sala de espera</h2><p>Cuando todos estén conectados, el anfitrión inicia la partida.</p><button id="startBtn" class="success hidden" onclick="startGame()">Iniciar partida</button></div><div id="questionBox" class="hidden"><span class="badge" id="qType"></span><h2 class="questionTitle" id="qTitle"></h2><div class="scenario" id="scenario"></div><div class="visualWrap"><div class="visual" id="visual"></div></div><div class="question" id="question"></div><div class="options" id="options"></div><div id="feedback"></div><div id="effectPanel" class="effectPanel hidden"><h3>🔥 ¡Pregunta bonus correcta!</h3><p>Elige un efecto negativo para aplicar a un oponente:</p><div id="effectTargets"></div></div></div><div id="ended" class="hidden"><h2>🏁 Partida finalizada</h2><p>Revisa la tabla de posiciones. El anfitrión puede iniciar una nueva ronda.</p><button id="restartBtn" class="primary hidden" onclick="startGame()">Nueva ronda</button></div></div><div class="card"><h2>🏆 Tabla de jugadores</h2><div id="players"></div><div class="feedback info"><strong>Reglas rápidas</strong><div class="explanation">✅ Normal correcta: 100 pts.<br>🔥 Bonus correcta: 300 pts + poder especial.<br>❤️ Cada jugador tiene 3 vidas.<br>❌ Al perder 3 vidas queda eliminado.</div></div></div></div></section>
 </div>
-
-<div id="questionBox" class="hidden">
-<span class="badge" id="qType"></span>
-<h2 class="questionTitle" id="qTitle"></h2>
-<div class="scenario" id="scenario"></div>
-<div class="visual" id="visual"></div>
-<h3 id="question"></h3>
-<div class="options" id="options"></div>
-<div id="feedback"></div>
-<div id="effectPanel" class="effectPanel hidden">
-<h3>🔥 Pregunta bonus correcta</h3>
-<p>Elige un efecto negativo para aplicar a un oponente:</p>
-<div id="effectTargets"></div>
-</div>
-</div>
-
-<div id="ended" class="hidden">
-<h2>🏁 Partida finalizada</h2>
-<p>Revisa la tabla de posiciones. El anfitrión puede reiniciar con una nueva ronda.</p>
-<button id="restartBtn" class="primary hidden" onclick="startGame()">Nueva ronda</button>
-</div>
-</div>
-
-<div class="card">
-<h2>Tabla de jugadores</h2>
-<div id="players"></div>
-<div class="feedback info">
-<strong>Reglas:</strong>
-<div class="explanation">
-Cada jugador inicia con 3 vidas. Cada error resta 1 vida. Si pierdes las 3 vidas, quedas fuera y debes esperar una nueva ronda.
-Las preguntas normales valen 100 puntos. Las bonus valen 300 puntos y permiten activar un efecto contra un oponente.
-</div>
-</div>
-</div>
-</div>
-</section>
-</div>
-
 <script src="/socket.io/socket.io.js"></script>
 <script>
-const socket = io();
-let myId=null, state=null, answerRevealed=null, countdown=null;
-
-function joinRoom(){
-  const name=document.getElementById("name").value.trim() || "Jugador";
-  const roomCode=document.getElementById("room").value.trim() || "CLASE";
-  socket.emit("joinRoom",{name,roomCode},(res)=>{
-    if(res.ok){myId=res.id;document.getElementById("join").classList.add("hidden");document.getElementById("main").classList.remove("hidden");}
-  });
-}
-function startGame(){socket.emit("startGame");}
-socket.on("roomState",(s)=>{state=s;render();});
-socket.on("answerReveal",(data)=>{answerRevealed=data;renderReveal();});
-socket.on("effectNotice",(msg)=>{showFeedback(`<div class="feedback no">${msg}</div>`);});
-socket.on("chooseEffect",()=>{renderEffectPanel();});
-
-function render(){
-  if(!state)return;
-  document.getElementById("roomLabel").innerText="Sala: "+state.code;
-  document.getElementById("phaseLabel").innerText=phaseName(state.phase);
-  renderPlayers();
-  const me=state.players.find(p=>p.id===myId);
-  const isHost=me && me.isHost;
-  document.getElementById("startBtn").classList.toggle("hidden",!(state.phase==="lobby" && isHost));
-  document.getElementById("restartBtn").classList.toggle("hidden",!(state.phase==="ended" && isHost));
-  document.getElementById("lobby").classList.toggle("hidden",state.phase!=="lobby");
-  document.getElementById("ended").classList.toggle("hidden",state.phase!=="ended");
-  document.getElementById("questionBox").classList.toggle("hidden",!(state.phase==="question"||state.phase==="effect"||state.phase==="answer"));
-  if(state.currentQuestion) renderQuestion();
-  startCountdown();
-}
-function phaseName(p){
-  return p==="lobby"?"Sala de espera":p==="question"?"Pregunta activa":p==="effect"?"Bonus: elegir efecto":p==="answer"?"Revisión":"Finalizado";
-}
-function renderPlayers(){
-  const div=document.getElementById("players"); div.innerHTML="";
-  state.players.forEach((p,i)=>{
-    const row=document.createElement("div"); row.className="leader";
-    row.innerHTML=`<div><span class="name ${p.alive?'':'dead'}">${i+1}. ${p.name}${p.isHost?' 👑':''}</span><br><span class="lives">❤ ${p.lives}</span></div><div class="score">${p.score} pts</div>`;
-    div.appendChild(row);
-  });
-}
-function renderQuestion(){
-  answerRevealed=null;
-  const q=state.currentQuestion;
-  document.getElementById("qType").innerText=q.type==="bonus"?"PREGUNTA BONUS 🔥":"PREGUNTA NORMAL";
-  document.getElementById("qTitle").innerText=`${state.questionIndex+1}/${state.total} · ${q.title}`;
-  document.getElementById("scenario").innerText=q.scenario;
-  document.getElementById("question").innerText=q.question;
-  document.getElementById("feedback").innerHTML="";
-  document.getElementById("effectPanel").classList.add("hidden");
-  document.getElementById("visual").innerHTML=triangleSVG();
-  const opts=document.getElementById("options"); opts.innerHTML="";
-  q.options.forEach(opt=>{
-    const btn=document.createElement("button"); btn.className="option"; btn.innerText=opt;
-    btn.onclick=()=>submitAnswer(btn,opt);
-    opts.appendChild(btn);
-  });
-}
-function submitAnswer(btn,opt){
-  socket.emit("submitAnswer",{answer:opt});
-  document.querySelectorAll(".option").forEach(b=>b.disabled=true);
-  btn.style.outline="4px solid #ffd166";
-}
-function renderReveal(){
-  if(!answerRevealed)return;
-  document.querySelectorAll(".option").forEach(b=>{
-    b.disabled=true;
-    if(b.innerText===answerRevealed.answer)b.classList.add("correct");
-  });
-  showFeedback(`<div class="feedback ok">Respuesta correcta: ${answerRevealed.answer}<div class="explanation">${answerRevealed.explanation}</div></div>`);
-}
-function showFeedback(html){document.getElementById("feedback").innerHTML=html;}
-function renderEffectPanel(){
-  const panel=document.getElementById("effectPanel");
-  const targets=document.getElementById("effectTargets");
-  targets.innerHTML="";
-  const opponents=state.players.filter(p=>p.id!==myId && p.alive);
-  if(!opponents.length){targets.innerHTML="<p>No hay oponentes vivos para aplicar efecto.</p>";return;}
-  opponents.forEach(p=>{
-    const box=document.createElement("div");
-    box.className="leader";
-    box.innerHTML=`<strong>${p.name}</strong><div><button class="danger" onclick="applyEffect('life','${p.id}')">Quitar 1 vida</button> <button class="yellow" onclick="applyEffect('freeze','${p.id}')">Congelar 10 s</button> <button class="secondary" onclick="applyEffect('steal','${p.id}')">Robar 150 pts</button></div>`;
-    targets.appendChild(box);
-  });
-  panel.classList.remove("hidden");
-}
-function applyEffect(effect,targetId){socket.emit("applyEffect",{effect,targetId});document.getElementById("effectPanel").classList.add("hidden");}
-function startCountdown(){
-  clearInterval(countdown);
-  if(!state || !state.questionEndsAt){document.getElementById("timer").innerText="";return;}
-  countdown=setInterval(()=>{
-    const left=Math.max(0,Math.ceil((state.questionEndsAt-Date.now())/1000));
-    document.getElementById("timer").innerText="⏱ "+left+" s";
-    if(left<=0)clearInterval(countdown);
-  },300);
-}
-function triangleSVG(){
-return `<svg viewBox="0 0 520 310"><rect width="520" height="310" fill="#ffffff"/><line x1="80" y1="250" x2="390" y2="250" stroke="#1769c2" stroke-width="8"/><line x1="390" y1="250" x2="390" y2="75" stroke="#12a150" stroke-width="8"/><line x1="80" y1="250" x2="390" y2="75" stroke="#d62828" stroke-width="8" stroke-dasharray="12 8"/><rect x="365" y="225" width="25" height="25" fill="none" stroke="#111" stroke-width="4"/><text x="175" y="285" font-size="23" font-weight="bold" fill="#1769c2">cateto</text><text x="405" y="165" font-size="23" font-weight="bold" fill="#12a150">cateto</text><text x="180" y="140" font-size="23" font-weight="bold" fill="#d62828">hipotenusa</text><text x="90" y="42" font-size="24" font-weight="bold" fill="#0b3d91">a² + b² = c²</text></svg>`;
-}
+const socket=io();let myId=null,state=null,answerRevealed=null,countdown=null,lastQuestionId=null;
+function joinRoom(){const name=document.getElementById('name').value.trim()||'Jugador';const roomCode=document.getElementById('room').value.trim()||'CLASE';socket.emit('joinRoom',{name,roomCode},res=>{if(res.ok){myId=res.id;document.getElementById('join').classList.add('hidden');document.getElementById('main').classList.remove('hidden')}})}
+function startGame(){socket.emit('startGame')}
+socket.on('roomState',s=>{state=s;render()});socket.on('answerReveal',data=>{answerRevealed=data;renderReveal();popConfetti()});socket.on('effectNotice',msg=>showFeedback(`<div class="feedback no">⚠️ ${msg}</div>`));socket.on('chooseEffect',()=>renderEffectPanel());
+function render(){if(!state)return;document.getElementById('roomLabel').innerText='Sala: '+state.code;document.getElementById('phaseLabel').innerText=phaseName(state.phase);document.getElementById('roundLabel').innerText=state.total?`${Math.min(state.questionIndex+1,state.total)}/${state.total}`:'Esperando';document.getElementById('progressBar').style.width=state.total?`${(state.questionIndex/state.total)*100}%`:'0%';renderPlayers();const me=state.players.find(p=>p.id===myId);const isHost=me&&me.isHost;document.getElementById('startBtn').classList.toggle('hidden',!(state.phase==='lobby'&&isHost));document.getElementById('restartBtn').classList.toggle('hidden',!(state.phase==='ended'&&isHost));document.getElementById('lobby').classList.toggle('hidden',state.phase!=='lobby');document.getElementById('ended').classList.toggle('hidden',state.phase!=='ended');document.getElementById('questionBox').classList.toggle('hidden',!(state.phase==='question'||state.phase==='effect'||state.phase==='answer'));if(state.currentQuestion)renderQuestion();startCountdown()}
+function phaseName(p){return p==='lobby'?'Sala de espera':p==='question'?'Pregunta activa':p==='effect'?'Bonus: elegir poder':p==='answer'?'Revisión':'Finalizado'}
+function renderPlayers(){const div=document.getElementById('players');div.innerHTML='';state.players.forEach((p,i)=>{const initials=(p.name||'?').substring(0,1).toUpperCase();const row=document.createElement('div');row.className='leader '+(i===0?'first':'');row.innerHTML=`<div><span class="avatar">${i===0?'👑':initials}</span><span class="name ${p.alive?'':'dead'}">${p.name}${p.isHost?' · anfitrión':''}</span><br><span class="lives">❤ ${p.lives}</span></div><div class="score">${p.score} pts</div>`;div.appendChild(row)})}
+function renderQuestion(){const q=state.currentQuestion;if(lastQuestionId!==q.id||state.phase==='question'){answerRevealed=null;lastQuestionId=q.id;document.getElementById('feedback').innerHTML='';document.getElementById('effectPanel').classList.add('hidden')}document.getElementById('qType').innerText=q.type==='bonus'?'🔥 PREGUNTA BONUS':'⭐ PREGUNTA NORMAL';document.getElementById('qTitle').innerText=q.title;document.getElementById('scenario').innerText=q.scenario;document.getElementById('question').innerText=q.question;document.getElementById('visual').innerHTML=sceneSVG(q);const opts=document.getElementById('options');opts.innerHTML='';q.options.forEach((opt,idx)=>{const btn=document.createElement('button');btn.className='option';btn.innerHTML=`<strong>${String.fromCharCode(65+idx)}.</strong> ${opt}`;btn.dataset.value=opt;btn.onclick=()=>submitAnswer(btn,opt);opts.appendChild(btn)})}
+function submitAnswer(btn,opt){socket.emit('submitAnswer',{answer:opt});document.querySelectorAll('.option').forEach(b=>b.disabled=true);btn.style.outline='4px solid #FEC84B'}
+function renderReveal(){if(!answerRevealed)return;document.querySelectorAll('.option').forEach(b=>{b.disabled=true;if(b.dataset.value===answerRevealed.answer)b.classList.add('correct')});showFeedback(`<div class="feedback ok">✅ Respuesta correcta: ${answerRevealed.answer}<div class="explanation">${answerRevealed.explanation}</div></div>`)}
+function showFeedback(html){document.getElementById('feedback').innerHTML=html}
+function renderEffectPanel(){const panel=document.getElementById('effectPanel'),targets=document.getElementById('effectTargets');targets.innerHTML='';const opponents=state.players.filter(p=>p.id!==myId&&p.alive);if(!opponents.length){targets.innerHTML='<p>No hay oponentes vivos para aplicar efecto.</p>';return}opponents.forEach(p=>{const box=document.createElement('div');box.className='leader';box.innerHTML=`<strong>${p.name}</strong><div><button class="danger" onclick="applyEffect('life','${p.id}')">💔 Quitar vida</button> <button class="yellow" onclick="applyEffect('freeze','${p.id}')">🧊 Congelar</button> <button class="secondary" onclick="applyEffect('steal','${p.id}')">💰 Robar pts</button></div>`;targets.appendChild(box)});panel.classList.remove('hidden')}
+function applyEffect(effect,targetId){socket.emit('applyEffect',{effect,targetId});document.getElementById('effectPanel').classList.add('hidden')}
+function startCountdown(){clearInterval(countdown);const timer=document.getElementById('timer');timer.classList.remove('low');if(!state||!state.questionEndsAt){timer.innerText='';return}countdown=setInterval(()=>{const left=Math.max(0,Math.ceil((state.questionEndsAt-Date.now())/1000));timer.innerText='⏱ '+left+' s';timer.classList.toggle('low',left<=10);if(left<=0)clearInterval(countdown)},250)}
+function popConfetti(){const colors=['#F04438','#FEC84B','#12B76A','#155EEF','#7A5AF8','#06B6D4'];for(let i=0;i<22;i++){const c=document.createElement('div');c.className='confetti';c.style.left=Math.random()*100+'vw';c.style.background=colors[Math.floor(Math.random()*colors.length)];c.style.animationDelay=Math.random()*.2+'s';document.body.appendChild(c);setTimeout(()=>c.remove(),1400)}}
+function sceneType(q){const t=(q.title+' '+q.scenario).toLowerCase();if(t.includes('tirolesa')||t.includes('cable')||t.includes('poste')||t.includes('antena'))return'cable';if(t.includes('escalera')||t.includes('pintor'))return'ladder';if(t.includes('cancha')||t.includes('terreno')||t.includes('pantalla')||t.includes('televisor')||t.includes('cuadro')||t.includes('lona'))return'rectangle';if(t.includes('rampa')||t.includes('puente')||t.includes('patinetas'))return'ramp';if(t.includes('dron'))return'drone';if(t.includes('ambulancia')||t.includes('mensajero')||t.includes('ciclista')||t.includes('patrulla')||t.includes('parque')||t.includes('ruta'))return'route';if(t.includes('bandera'))return'flag';return'default'}
+function sceneSVG(q){const type=sceneType(q);const safe=q.title.replace(/&/g,'&amp;').replace(/</g,'&lt;');const common=`<defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#EAF4FF"/><stop offset="1" stop-color="#D1FADF"/></linearGradient></defs><rect width="640" height="360" rx="24" fill="url(#g1)"/><text x="24" y="38" font-size="22" font-weight="900" fill="#083344">${safe}</text>`;const tri=`<line x1="110" y1="280" x2="470" y2="280" stroke="#155EEF" stroke-width="9" stroke-linecap="round"/><line x1="470" y1="280" x2="470" y2="85" stroke="#12B76A" stroke-width="9" stroke-linecap="round"/><line x1="110" y1="280" x2="470" y2="85" stroke="#F04438" stroke-width="9" stroke-dasharray="14 10" stroke-linecap="round"/><rect x="444" y="254" width="26" height="26" fill="none" stroke="#101828" stroke-width="4"/><circle cx="110" cy="280" r="10" fill="#101828"/><circle cx="470" cy="280" r="10" fill="#101828"/><circle cx="470" cy="85" r="10" fill="#101828"/><text x="250" y="315" font-size="20" font-weight="900" fill="#155EEF">cateto</text><text x="490" y="190" font-size="20" font-weight="900" fill="#12B76A">cateto</text><text x="245" y="165" font-size="20" font-weight="900" fill="#F04438">hipotenusa</text>`;let deco='';if(type==='drone')deco='<text x="485" y="82" font-size="48">🚁</text><text x="95" y="270" font-size="38">🏟️</text>';else if(type==='ladder')deco='<rect x="455" y="70" width="18" height="215" fill="#98A2B3"/><text x="485" y="86" font-size="42">🪜</text><text x="82" y="276" font-size="34">🎨</text>';else if(type==='cable')deco='<rect x="455" y="82" width="24" height="210" fill="#667085"/><text x="482" y="92" font-size="42">⚡</text><text x="86" y="282" font-size="34">🧰</text>';else if(type==='rectangle')deco='<rect x="130" y="92" width="310" height="185" rx="12" fill="#D1E9FF" stroke="#155EEF" stroke-width="5"/><line x1="130" y1="277" x2="440" y2="92" stroke="#F04438" stroke-width="8" stroke-dasharray="12 8"/><text x="460" y="120" font-size="42">📺</text><text x="205" y="205" font-size="28" font-weight="900" fill="#083344">diagonal</text>';else if(type==='ramp')deco='<polygon points="130,280 470,280 470,115" fill="#FEDF89" stroke="#F79009" stroke-width="5"/><line x1="130" y1="280" x2="470" y2="115" stroke="#F04438" stroke-width="9" stroke-dasharray="12 8"/><text x="500" y="120" font-size="42">♿</text>';else if(type==='route')deco='<text x="90" y="276" font-size="42">🚑</text><text x="475" y="80" font-size="42">📍</text>';else if(type==='flag')deco='<rect x="460" y="85" width="16" height="200" fill="#667085"/><polygon points="476,90 560,115 476,140" fill="#F04438"/><text x="82" y="282" font-size="36">🏫</text>';else deco='<text x="500" y="90" font-size="44">📐</text>';if(type==='rectangle'||type==='ramp')return`<svg viewBox="0 0 640 360">${common}${deco}<text x="40" y="335" font-size="18" font-weight="800" fill="#475467">Observa el triángulo rectángulo escondido en la situación.</text></svg>`;return`<svg viewBox="0 0 640 360">${common}${tri}${deco}<text x="40" y="335" font-size="18" font-weight="800" fill="#475467">Usa a² + b² = c² para resolver la misión.</text></svg>`}
 </script>
 </body>
 </html>
+
