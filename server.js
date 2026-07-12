@@ -405,7 +405,7 @@ function startGame(room){
   const bonus = shuffle(QUESTION_BANK.filter(q=>q.type==="bonus"));
   const selected=[];
   for(let i=0;i<MAX_QUESTIONS;i++){
-    if((i===4 || i===9 || i===14) && bonus.length) selected.push(bonus.shift());
+    if((i===2 || i===5 || i===8 || i===11 || i===14) && bonus.length) selected.push(bonus.shift());
     else if(i%2===0 && normalHyp.length) selected.push(normalHyp.shift());
     else if(normalCat.length) selected.push(normalCat.shift());
     else if(normalHyp.length) selected.push(normalHyp.shift());
