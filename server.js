@@ -384,10 +384,10 @@ function nextQuestion(room){
   room.answered={};room.bonusWinner=null;room.pendingEffect=null;room.frozen={};
   if(room.questionIndex>=room.questions.length){room.phase="ended";emitRoom(room);return;}
   room.phase="question";
-  room.questionEndsAt=Date.now()+45000;
+  room.questionEndsAt=Date.now()+120000;
   emitRoom(room);
   clearTimeout(room.timer);
-  room.timer=setTimeout(()=>showAnswer(room),45000);
+  room.timer=setTimeout(()=>showAnswer(room),120000);
 }
 function showAnswer(room){
   if(room.phase!=="question") return;
